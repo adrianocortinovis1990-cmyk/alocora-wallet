@@ -13,7 +13,7 @@ Design files for **Alocora Wallet**, a virtual wallet for managing expenses, bud
 | Web app | `Main.dc.html` (+ `MainPersonal`, `MainFamily`), `Projects.dc.html`, `Plan.dc.html`, `Documents.dc.html`, `Settings.dc.html` |
 | Mobile app | `Mobile.dc.html` (+ `MobilePersonal`, `MobileFamily`), `MobileAdd.dc.html`, `MobileDocs.dc.html`, `MobileSettings.dc.html` |
 | AI assistant | `AiChat.dc.html` |
-| Assets | `alocora-logo.png` |
+| Assets | `alocora-logo.png`, `alocora-logo-light.png` (for dark backgrounds) |
 | Canvas layout | `canvas.json` |
 
 ## Notes
