@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alocora Wallet — Projects and resource allocation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#C9D2F3}
+.space.space.space.space.space{background-color:#EBEDF9;background-image:radial-gradient(ellipse 1800px 900px at -10% 1500px,rgba(255,255,255,.9) 0%,rgba(242,244,252,.6) 36%,transparent 62%),radial-gradient(ellipse 1100px 650px at 100% 0px,rgba(66,92,222,.5),transparent 70%),radial-gradient(ellipse 900px 600px at 0% 420px,rgba(150,124,240,.32),transparent 70%),linear-gradient(170deg,#D6DCF6 0px,#ABBAEE 520px,#90A4E9 900px,#C3CCF2 1250px,#EBEDF9 1600px);background-repeat:no-repeat}
+.space.space.space.space.space::before,.space.space.space.space.space::after{display:none}
+.grad{background:linear-gradient(90deg,#3B5BDB 0%,#7C3AED 52%,#C2418C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+a{color:#338EF7}a:hover{color:#66AAF9}
+.nav-a{color:#565B70;text-decoration:none}
+.nav-a:hover{color:#1B1C22;background:rgba(255,255,255,0.5)}
+.btn:hover{filter:brightness(1.12)}
+input[type=range]{accent-color:#2F6BFF}
+.space.space.space.space{background-color:#08090E;background-image:radial-gradient(ellipse 1500px 1300px at 50% 600px,transparent 58%,rgba(0,0,0,.5) 100%),radial-gradient(ellipse 900px 380px at 12% 0px,rgba(150,185,255,.12),transparent 70%),radial-gradient(ellipse 1500px 720px at 50% 60px,rgba(30,58,150,.45),rgba(16,30,80,.2) 45%,transparent 75%),radial-gradient(ellipse 420px 620px at 30% 640px,rgba(47,107,255,.18),transparent 70%),radial-gradient(ellipse 420px 620px at 70% 640px,rgba(47,107,255,.18),transparent 70%),radial-gradient(ellipse 1000px 500px at 50% 520px,rgba(22,44,120,.2),transparent 72%);background-repeat:no-repeat}
+.space.space.space.space::before{display:none}
+.space.space.space.space::after{top:180px;width:920px;height:960px;margin-left:-460px;border:70px solid rgba(47,107,255,.58);filter:blur(70px);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 28%,#000 66%,transparent 96%);mask-image:linear-gradient(180deg,transparent 0%,#000 28%,#000 66%,transparent 96%)}
+.space.space.space{background-color:#0A0B10;background-image:radial-gradient(ellipse 1500px 1300px at 50% 600px,transparent 55%,rgba(0,0,0,.55) 100%),radial-gradient(ellipse 900px 420px at 12% 0px,rgba(150,185,255,.16),transparent 70%),linear-gradient(118deg,transparent 30%,rgba(110,150,255,.06) 40%,rgba(255,255,255,.03) 44%,transparent 54%),radial-gradient(ellipse 1200px 600px at 50% 0px,rgba(28,56,130,.42),transparent 72%),radial-gradient(ellipse 700px 160px at 50% 1130px,rgba(47,107,255,.26),transparent 70%),radial-gradient(ellipse 900px 500px at 50% 760px,rgba(20,40,120,.14),transparent 72%);background-repeat:no-repeat}
+.space.space.space::before{border-color:#3B7BFF;box-shadow:0 0 22px rgba(90,150,255,.75),0 14px 60px rgba(47,107,255,.45),inset 0 0 14px rgba(170,205,255,.6)}
+.space.space{position:relative;isolation:isolate;background-color:#0B0C10;background-image:radial-gradient(ellipse 1200px 600px at 50% 0px,rgba(28,48,110,.38),transparent 72%),radial-gradient(ellipse 900px 500px at 50% 760px,rgba(20,40,120,.14),transparent 72%)}
+.space.space::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:240px;width:880px;height:880px;margin-left:-440px;box-sizing:border-box;border-radius:50%;border:6px solid #2F6BFF;box-shadow:0 10px 40px rgba(47,107,255,.35);-webkit-mask-image:linear-gradient(180deg,transparent 56%,#000 86%);mask-image:linear-gradient(180deg,transparent 56%,#000 86%)}
+.space.space::after{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:240px;width:880px;height:880px;margin-left:-440px;box-sizing:border-box;border-radius:50%;border:56px solid rgba(47,107,255,.5);filter:blur(60px);-webkit-mask-image:linear-gradient(180deg,transparent 2%,#000 42%,#000 70%,transparent 92%);mask-image:linear-gradient(180deg,transparent 2%,#000 42%,#000 70%,transparent 92%)}
+.space{background-color:#04030B;background-image:radial-gradient(circle at 8% 2%,rgba(255,255,255,.9) 0 1px,transparent 1.6px),radial-gradient(circle at 21% 5%,rgba(255,255,255,.7) 0 1px,transparent 1.6px),radial-gradient(circle at 34% 1.5%,rgba(255,255,255,.8) 0 1.2px,transparent 1.8px),radial-gradient(circle at 47% 4%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 59% 2.5%,rgba(255,255,255,.9) 0 1.3px,transparent 2px),radial-gradient(circle at 71% 6%,rgba(255,255,255,.7) 0 1px,transparent 1.6px),radial-gradient(circle at 83% 2%,rgba(255,255,255,.8) 0 1px,transparent 1.6px),radial-gradient(circle at 93% 5%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 14% 9%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 39% 8%,rgba(255,255,255,.8) 0 1px,transparent 1.6px),radial-gradient(circle at 66% 10%,rgba(255,255,255,.7) 0 1.2px,transparent 1.8px),radial-gradient(circle at 88% 9%,rgba(255,255,255,.8) 0 1px,transparent 1.6px),radial-gradient(circle at 27% 12%,rgba(255,255,255,.5) 0 1px,transparent 1.6px),radial-gradient(circle at 53% 11%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 78% 13%,rgba(255,255,255,.5) 0 1px,transparent 1.6px),radial-gradient(ellipse 2600px 2000px at 50% 2140px,#020107 0%,#05041A 50%,#0E0B3E 55.5%,#2A2378 57%,rgba(90,60,190,.12) 58.2%,rgba(70,40,160,.04) 63%,transparent 72%),radial-gradient(ellipse 1100px 220px at 50% 1000px,rgba(120,90,210,.06),transparent 70%),linear-gradient(180deg,#010104 0px,#030209 600px,#07051A 1000px,#020107 1400px);background-repeat:no-repeat}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+.rv.rv-in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</helmet>
+<div class="space" style="min-height: 100vh; box-sizing: border-box; display: flex; flex-wrap: wrap; overflow: hidden; font-family: Inter, system-ui, sans-serif; color: #1B1C22; font-size: 14px">
+
+<nav aria-label="Primary" style="flex: 1 1 232px; box-sizing: border-box; padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.32); background: rgba(255,255,255,0.23); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); display: flex; flex-direction: column; gap: 28px">
+  <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+    <div style="width: 36px; height: 36px; border-radius: 10px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; letter-spacing: -0.04em"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display: block"><path d="M4.5 20 12 4l7.5 16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.3 14.3h7.4" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round"></path><circle cx="12" cy="4.2" r="1.2" fill="#F472B6"></circle></svg></div>
+    <span style="font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Alocora Wallet</span>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 4px">
+    <a href="Main.dc.html" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-weight: 500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>Overview</a>
+    <a href="Projects.dc.html" aria-current="page" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 6px 14px rgba(52,64,140,0.14); color: #1B1C22; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Projects</a>
+    <a href="Plan.dc.html" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-weight: 500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>Business plan</a>
+    <a href="Documents.dc.html" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-weight: 500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h7l5 5v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M15 3v5h5"></path><path d="M3 7v12a3 3 0 0 0 3 3h9"></path></svg>Documents</a>
+    <a href="Main.dc.html" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-weight: 500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h13l-4-4"></path><path d="M17 17H4l4 4"></path></svg>Transactions</a>
+  </div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 24px">
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 class="grad" style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -0.03em">Projects &amp; resource allocation</h1>
+      <span style="color: #565B70">Split each project's budget across departments and assign people</span>
+    </div>
+    <button type="button" class="btn" style="height: 44px; padding: 0 18px; border: 0; border-radius: 12px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); box-shadow: 0 10px 22px rgba(27,28,34,0.28), inset 0 1px 0 rgba(255,255,255,0.18); color: #FFFFFF; font: 600 14px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New project</button>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+    <section aria-label="Project list" style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{list}}" as="p" hint-placeholder-count="3">
+        <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="text-align: left; padding: 16px; border-radius: 16px; background: {{p.bg}}; border: 2px solid {{p.border}}; color: #1B1C22; cursor: pointer; display: flex; flex-direction: column; gap: 10px; font-family: Inter, sans-serif">
+          <span style="display: flex; justify-content: space-between; width: 100%; gap: 8px">
+            <span style="font-size: 15px; font-weight: 600">{{p.name}}</span>
+            <span style="font-size: 12px; color: #565B70">{{p.deadline}}</span>
+          </span>
+          <span style="font-size: 13px; color: #565B70">Funded from: {{p.account}}</span>
+          <span style="display: flex; height: 8px; width: 100%; border-radius: 999px; overflow: hidden; background: rgba(40,50,110,0.1)">
+            <sc-for list="{{p.segs}}" as="s" hint-placeholder-count="4">
+              <span style="height: 100%; width: {{s.w}}%; background: {{s.color}}"></span>
+            </sc-for>
+          </span>
+          <span style="font-size: 13px; font-weight: 600">{{p.budgetFmt}}</span>
+        </button>
+      </sc-for>
+    </section>
+
+    <section aria-label="Allocation" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <div style="padding: 24px; border-radius: 20px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); border: 1px solid rgba(255,255,255,0.34); display: flex; flex-direction: column; gap: 20px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 13px; color: #565B70">Project budget</span>
+            <h2 style="margin: 0; font-size: 22px; font-weight: 600">{{cur.name}}</h2>
+            <span style="font-size: 40px; font-weight: 600; letter-spacing: -0.03em">{{cur.budgetFmt}}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px">
+            <span style="height: 30px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px; background: {{status.bg}}; color: {{status.fg}}; font-size: 13px; font-weight: 600">{{status.text}}</span>
+            <span style="font-size: 13px; color: #565B70">Allocated {{allocFmt}} · {{unallocLabel}}</span>
+          </div>
+        </div>
+
+        <div style="display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: rgba(40,50,110,0.1)">
+          <sc-for list="{{cats}}" as="c" hint-placeholder-count="4">
+            <span style="height: 100%; width: {{c.share}}%; background: {{c.color}}"></span>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <sc-for list="{{cats}}" as="c" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: minmax(120px, 180px) minmax(0, 1fr) 110px; gap: 16px; align-items: center">
+              <label for="{{c.id}}" style="display: flex; align-items: center; gap: 10px; font-weight: 500"><span style="width: 12px; height: 12px; border-radius: 4px; background: {{c.color}}; box-shadow: 0 2px 6px rgba(52,64,140,0.25)"></span>{{c.name}}</label>
+              <input id="{{c.id}}" type="range" min="0" max="{{c.max}}" step="250" value="{{c.value}}" onChange="{{c.change}}" style="width: 100%; height: 28px; accent-color: {{c.solid}}">
+              <span style="text-align: right; font-weight: 600">{{c.valueFmt}}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; padding-top: 4px; border-top: 1px solid rgba(40,50,110,0.1)">
+          <button type="button" onClick="{{even}}" style="height: 40px; padding: 0 14px; border: 1px solid rgba(40,50,110,0.18); border-radius: 12px; background: transparent; color: #1B1C22; font: 600 13px Inter, sans-serif; cursor: pointer; margin-top: 14px">Split evenly</button>
+          <button type="button" onClick="{{reset}}" style="height: 40px; padding: 0 14px; border: 1px solid rgba(40,50,110,0.18); border-radius: 12px; background: transparent; color: #1B1C22; font: 600 13px Inter, sans-serif; cursor: pointer; margin-top: 14px">Reset</button>
+          <button type="button" class="btn" style="height: 40px; padding: 0 16px; border: 0; border-radius: 12px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); box-shadow: 0 8px 18px rgba(27,28,34,0.28), inset 0 1px 0 rgba(255,255,255,0.18); color: #FFFFFF; font: 600 13px Inter, sans-serif; cursor: pointer; margin-top: 14px; margin-left: auto">Save allocation</button>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px">
+        <div style="flex: 999 1 380px; min-width: 0; padding: 22px; border-radius: 20px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); border: 1px solid rgba(255,255,255,0.34); display: flex; flex-direction: column; gap: 14px">
+          <h2 style="margin: 0; font-size: 18px; font-weight: 600">People on this project</h2>
+          <sc-for list="{{team}}" as="t" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span aria-hidden="true" style="width: 38px; height: 38px; flex: none; border-radius: 50%; box-sizing: border-box; border: 2px solid {{t.ring}}; background: rgba(40,50,110,0.1); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">{{t.i}}</span>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; gap: 8px"><span style="font-weight: 500">{{t.name}}</span><span style="color: #565B70; font-size: 13px">{{t.load}}% of their week</span></div>
+                <div style="height: 6px; border-radius: 999px; background: rgba(40,50,110,0.1); overflow: hidden"><div style="height: 100%; width: {{t.load}}%; background: {{t.bar}}; border-radius: 999px"></div></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="flex: 1 1 280px; padding: 22px; border-radius: 20px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); border: 1px solid rgba(255,255,255,0.34); display: flex; flex-direction: column; gap: 14px">
+          <h2 style="margin: 0; font-size: 18px; font-weight: 600">Milestones</h2>
+          <sc-for list="{{milestones}}" as="ms" hint-placeholder-count="3">
+            <div style="display: flex; gap: 12px; align-items: flex-start">
+              <span aria-hidden="true" style="width: 18px; height: 18px; margin-top: 1px; flex: none; border-radius: 50%; box-sizing: border-box; border: 2px solid {{ms.ring}}; background: {{ms.fill}}"></span>
+              <div style="display: flex; flex-direction: column; gap: 2px">
+                <span style="font-weight: 500">{{ms.name}}</span>
+                <span style="font-size: 12px; color: #565B70">{{ms.date}} · {{ms.costFmt}}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1280}}'>
+class Component extends DCLogic {
+  initReveal(sel) {
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce || typeof IntersectionObserver === 'undefined' || typeof document === 'undefined') return;
+    this.rvIO = new IntersectionObserver((entries) => {
+      let k = 0;
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.style.transitionDelay = Math.min(k++, 5) * 110 + 'ms';
+        en.target.classList.add('rv-in');
+        this.rvIO.unobserve(en.target);
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+    const scan = () => {
+      let els = [];
+      try { els = document.querySelectorAll(sel); } catch (e) { return; }
+      els.forEach((el) => { if (el.dataset.rv) return; el.dataset.rv = '1'; el.classList.add('rv'); this.rvIO.observe(el); });
+    };
+    scan();
+    try { this.rvMO = new MutationObserver(() => { clearTimeout(this.rvT); this.rvT = setTimeout(scan, 30); }); this.rvMO.observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  }
+  stopReveal() { if (this.rvIO) this.rvIO.disconnect(); if (this.rvMO) this.rvMO.disconnect(); clearTimeout(this.rvT); }
+  componentWillUnmount() { this.stopReveal(); }
+  componentDidMount() { this.initReveal('main > *'); }
+  constructor(props) {
+    super(props);
+    this.base = {
+      launch: { name: 'Spring Launch', account: 'Spring Launch account', deadline: 'Mar 2027', budget: 25000, alloc: { Marketing: 14000, Operations: 3500, People: 5000, Tools: 1500 },
+        team: [['Anna M.', 'AM', 60, '#FFFFFF'], ['Jordan S.', 'JS', 40, '#3E4257'], ['Lea K.', 'LK', 85, '#F31260']],
+        milestones: [['Campaign brief', 'Nov 2026', 1500, true], ['Creative production', 'Jan 2027', 6000, false], ['Launch week', 'Mar 2027', 9000, false]] },
+      platform: { name: 'Platform v2', account: 'Platform v2 account', deadline: 'Jun 2027', budget: 40000, alloc: { Marketing: 4000, Operations: 9000, People: 22000, Tools: 3000 },
+        team: [['Rob B.', 'RB', 90, '#9353D3'], ['Tara N.', 'TN', 50, '#FFFFFF']],
+        milestones: [['Architecture review', 'Dec 2026', 2000, true], ['Beta release', 'Mar 2027', 14000, false], ['General availability', 'Jun 2027', 12000, false]] },
+      retail: { name: 'Retail expansion', account: 'Main account', deadline: 'Sep 2027', budget: 18000, alloc: { Marketing: 5000, Operations: 6000, People: 2000, Tools: 500 },
+        team: [['Anna M.', 'AM', 20, '#3E4257']],
+        milestones: [['Location research', 'Jan 2027', 1200, false], ['Supplier contracts', 'Apr 2027', 5000, false], ['Store opening', 'Sep 2027', 9000, false]] }
+    };
+    const alloc = {};
+    Object.keys(this.base).forEach(k => { alloc[k] = { ...this.base[k].alloc }; });
+    this.state = { sel: 'launch', alloc };
+  }
+  eur(n) { return (n < 0 ? '−' : '') + new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(Math.abs(n)); }
+  renderVals() {
+    const st = this.state;
+    const colors = { Marketing: 'linear-gradient(90deg, #6F8CF7, #3B5BDB)', Operations: 'linear-gradient(90deg, #A884F7, #7C3AED)', People: 'linear-gradient(90deg, #E58BBC, #C2418C)', Tools: 'linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22)' };
+    const solids = { Marketing: '#3B5BDB', Operations: '#7C3AED', People: '#C2418C', Tools: '#3E4257' };
+    const keys = Object.keys(colors);
+    const list = Object.keys(this.base).map(k => {
+      const b = this.base[k];
+      const a = st.alloc[k];
+      const on = st.sel === k;
+      return { name: b.name, account: b.account, deadline: b.deadline, budgetFmt: this.eur(b.budget), pressed: on ? 'true' : 'false', bg: on ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.45)', border: on ? '#3B5BDB' : 'rgba(40,50,110,0.1)',
+        segs: keys.map(c => ({ color: colors[c], w: Math.min(100, a[c] / b.budget * 100) })), pick: () => this.setState({ sel: k }) };
+    });
+    const b = this.base[st.sel];
+    const a = st.alloc[st.sel];
+    const total = keys.reduce((s, c) => s + a[c], 0);
+    const unalloc = b.budget - total;
+    const setCat = (c, v) => this.setState({ alloc: { ...this.state.alloc, [st.sel]: { ...this.state.alloc[st.sel], [c]: v } } });
+    const cats = keys.map(c => ({ id: 'cat-' + c, name: c, color: colors[c], solid: solids[c], value: a[c], max: b.budget, valueFmt: this.eur(a[c]), share: Math.min(100, a[c] / Math.max(total, b.budget) * 100), change: (e) => setCat(c, Number(e.target.value)) }));
+    const status = unalloc < 0 ? { text: 'Over budget by ' + this.eur(-unalloc), bg: 'rgba(229,17,79,0.12)', fg: '#B4123F' } : (unalloc === 0 ? { text: 'Fully allocated', bg: 'rgba(62,66,87,0.12)', fg: '#3E4257' } : { text: this.eur(unalloc) + ' unallocated', bg: 'rgba(229,17,79,0.12)', fg: '#B4123F' });
+    const team = b.team.map(([name, i, load, ring]) => ({ name, i, load, ring, bar: load > 80 ? 'linear-gradient(90deg, #E58BBC, #C2418C)' : 'linear-gradient(90deg, #6F8CF7, #3B5BDB 60%, #7C3AED)' }));
+    const milestones = b.milestones.map(([name, date, cost, done]) => ({ name, date, costFmt: this.eur(cost), ring: done ? '#3E4257' : 'rgba(40,50,110,0.3)', fill: done ? 'linear-gradient(135deg, #9095A8, #1B1C22)' : 'transparent' }));
+    return {
+      list, cats, status, team, milestones,
+      cur: { name: b.name, budgetFmt: this.eur(b.budget) },
+      allocFmt: this.eur(total), unallocLabel: unalloc >= 0 ? this.eur(unalloc) + ' free' : this.eur(-unalloc) + ' over',
+      even: () => { const v = Math.floor(b.budget / keys.length / 250) * 250; const n = {}; keys.forEach(c => { n[c] = v; }); this.setState({ alloc: { ...this.state.alloc, [st.sel]: n } }); },
+      reset: () => this.setState({ alloc: { ...this.state.alloc, [st.sel]: { ...b.alloc } } })
+    };
+  }
+}
+</script>
+</body>
+</html>

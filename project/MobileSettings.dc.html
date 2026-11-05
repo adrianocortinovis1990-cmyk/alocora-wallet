@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alocora Wallet — Mobile profile and settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#C9D2F3}
+a{color:#3B5BDB}a:hover{color:#2B46B8}
+.scroll::-webkit-scrollbar{display:none}
+.chip:active{transform:translateY(1px)}
+.row:hover{background:rgba(255,255,255,0.45)}
+input::placeholder{color:#6B7085}
+select option{background:#FFFFFF;color:#1B1C22}
+.space{position:relative;isolation:isolate;background-color:#B7C3EE;background-image:radial-gradient(ellipse 150% 55% at -15% 108%,rgba(255,255,255,.9) 0%,rgba(242,244,252,.65) 34%,transparent 62%),radial-gradient(ellipse 75% 42% at 100% 0%,rgba(66,92,222,.55),transparent 70%),radial-gradient(ellipse 70% 40% at 0% 28%,rgba(150,124,240,.35),transparent 70%),linear-gradient(165deg,#D6DCF6 0%,#ABBAEE 40%,#90A4E9 62%,#C3CCF2 86%,#EBEDF9 100%)}
+.grad{background:linear-gradient(90deg,#3B5BDB 0%,#7C3AED 52%,#C2418C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+</style>
+</helmet>
+<div class="space" style="width: 390px; height: 844px; box-sizing: border-box; overflow: hidden; font-family: Inter, system-ui, sans-serif; color: #1B1C22; font-size: 14px">
+  <div class="scroll" style="position: absolute; inset: 0; overflow-y: auto; scrollbar-width: none; padding: 56px 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Mobile.dc.html" class="chip" aria-label="Back" style="width: 44px; height: 44px; border-radius: 50%; box-sizing: border-box; background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); border: 1px solid rgba(255,255,255,0.95); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 6px 14px rgba(52,64,140,0.16); color: #1B1C22; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></a>
+      <h1 class="grad" style="margin: 0; font-size: 20px; font-weight: 700">Profile &amp; settings</h1>
+      <span style="width: 44px"></span>
+    </div>
+
+    <sc-if value="{{hasNotice}}" hint-placeholder-val="{{false}}">
+      <span role="status" style="align-self: center; height: 34px; display: inline-flex; align-items: center; gap: 8px; padding: 0 14px; border-radius: 12px; background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 6px 14px rgba(52,64,140,0.14); font-size: 13px; font-weight: 600; color: #3E4257"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>{{notice}}</span>
+    </sc-if>
+
+    <section aria-label="Profile" style="padding: 20px; border-radius: 24px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.34); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+      <div style="position: relative">
+        <div aria-hidden="true" style="width: 84px; height: 84px; border-radius: 50%; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font: 700 28px Inter, sans-serif; box-shadow: 0 0 0 4px #FFFFFF, 0 14px 30px rgba(52,64,140,0.3)">{{initials}}</div>
+        <button type="button" class="chip" aria-label="Change photo" style="position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 50%; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.95); background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 4px 10px rgba(52,64,140,0.18); color: #1B1C22; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></button>
+      </div>
+      <span style="font-size: 19px; font-weight: 700; margin-top: 6px">{{displayName}}</span>
+      <span style="font-size: 13px; color: #565B70">{{email}}</span>
+      <span style="height: 26px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 8px; background: rgba(124,58,237,0.12); color: #6227C9; font-size: 12px; font-weight: 600">{{purpose}} profile · {{currency}}</span>
+      <a href="MobileChoose.dc.html" class="chip" style="height: 38px; margin-top: 4px; padding: 0 14px; border-radius: 12px; box-sizing: border-box; background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); border: 1px solid rgba(255,255,255,0.95); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 6px 14px rgba(52,64,140,0.14); color: #1B1C22; font: 600 13px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px; text-decoration: none">Switch profile<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h12M13 6l6 6-6 6M21 5v14"></path></svg></a>
+    </section>
+
+    <div role="tablist" aria-label="Settings sections" style="display: flex; padding: 4px; gap: 2px; border-radius: 14px; background: rgba(214,220,242,0.6); box-shadow: inset 0 1px 3px rgba(40,50,110,0.18), inset 0 -1px 0 rgba(255,255,255,0.6)">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+        <button type="button" role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="flex: 1; min-width: 0; height: 36px; border-radius: 11px; border: 0; background: {{t.bg}}; box-shadow: {{t.shadow}}; color: {{t.fg}}; font: 600 12px Inter, sans-serif; cursor: pointer">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{isProfile}}" hint-placeholder-val="{{true}}">
+      <section aria-label="Edit profile" style="padding: 18px; border-radius: 22px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.34); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 14px 32px rgba(52,64,140,0.14); display: flex; flex-direction: column; gap: 12px">
+        <sc-for list="{{fields}}" as="f" hint-placeholder-count="4">
+          <label style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 12px; font-weight: 600; color: #565B70">{{f.label}}</span>
+            <input type="{{f.type}}" value="{{f.value}}" onChange="{{f.change}}" placeholder="{{f.ph}}" style="height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 0; background: rgba(214,220,242,0.6); box-shadow: inset 0 1px 3px rgba(40,50,110,0.2), inset 0 -1px 0 rgba(255,255,255,0.7); color: #1B1C22; font: 500 15px Inter, sans-serif; outline: 0">
+          </label>
+        </sc-for>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="m-email" style="font-size: 12px; font-weight: 600; color: #565B70">Email address</label>
+          <span style="display: flex; align-items: center; gap: 6px; height: 50px; padding: 0 5px 0 14px; border-radius: 12px; box-sizing: border-box; background: rgba(214,220,242,0.6); box-shadow: inset 0 1px 3px rgba(40,50,110,0.2), inset 0 -1px 0 rgba(255,255,255,0.7)">
+            <input id="m-email" type="email" value="{{emailDraft}}" onChange="{{setEmail}}" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: #1B1C22; font: 500 15px Inter, sans-serif">
+            <button type="button" onClick="{{updateEmail}}" class="chip" style="height: 40px; padding: 0 12px; border-radius: 10px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.95); background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 4px 10px rgba(52,64,140,0.14); color: #1B1C22; font: 600 13px Inter, sans-serif; cursor: pointer">Update</button>
+          </span>
+          <span style="font-size: 12px; line-height: 1.4; color: {{emailHintColor}}">{{emailHint}}</span>
+        </div>
+        <button type="button" onClick="{{saveProfile}}" class="chip" style="height: 50px; margin-top: 4px; border-radius: 14px; border: 0; background: #1B1C22; color: #FFFFFF; font: 600 15px Inter, sans-serif; box-shadow: 0 10px 22px rgba(27,28,34,0.28); cursor: pointer">Save profile</button>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isPrefs}}" hint-placeholder-val="{{false}}">
+      <section aria-label="Preferences" style="padding: 18px; border-radius: 22px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.34); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 14px 32px rgba(52,64,140,0.14); display: flex; flex-direction: column; gap: 16px">
+        <sc-for list="{{segs}}" as="g" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-weight: 600">{{g.label}}</span>
+            <div role="radiogroup" aria-label="{{g.label}}" style="display: flex; padding: 4px; gap: 2px; border-radius: 12px; background: rgba(214,220,242,0.6); box-shadow: inset 0 1px 3px rgba(40,50,110,0.18), inset 0 -1px 0 rgba(255,255,255,0.6)">
+              <sc-for list="{{g.opts}}" as="o" hint-placeholder-count="3">
+                <button type="button" role="radio" aria-checked="{{o.checked}}" onClick="{{o.pick}}" style="flex: 1; height: 36px; border-radius: 9px; border: 0; background: {{o.bg}}; box-shadow: {{o.shadow}}; color: {{o.fg}}; font: 600 13px Inter, sans-serif; cursor: pointer">{{o.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <sc-for list="{{selects}}" as="s" hint-placeholder-count="3">
+          <label style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+            <span style="font-weight: 600">{{s.label}}</span>
+            <select value="{{s.value}}" onChange="{{s.change}}" style="height: 42px; min-width: 150px; padding: 0 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.95); background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 4px 10px rgba(52,64,140,0.12); color: #1B1C22; font: 500 14px Inter, sans-serif">
+              <sc-for list="{{s.options}}" as="o" hint-placeholder-count="3"><option value="{{o}}">{{o}}</option></sc-for>
+            </select>
+          </label>
+        </sc-for>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isNotif}}" hint-placeholder-val="{{false}}">
+      <section aria-label="Notifications" style="padding: 6px 18px; border-radius: 22px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.34); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 14px 32px rgba(52,64,140,0.14); display: flex; flex-direction: column">
+        <sc-for list="{{toggles}}" as="t" hint-placeholder-count="4">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid {{t.line}}">
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">{{t.label}}</span><span style="font-size: 12px; color: #565B70">{{t.hint}}</span></div>
+            <button type="button" role="switch" aria-checked="{{t.checked}}" aria-label="{{t.label}}" onClick="{{t.toggle}}" style="width: 52px; height: 30px; flex: none; border-radius: 999px; border: 0; padding: 3px; box-sizing: border-box; background: {{t.track}}; box-shadow: inset 0 1px 3px rgba(40,50,110,0.25); display: flex; justify-content: {{t.justify}}; cursor: pointer"><span style="width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 2px 6px rgba(30,40,90,0.3)"></span></button>
+          </div>
+        </sc-for>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isSecurity}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <section aria-label="Security" style="padding: 6px; border-radius: 22px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.34); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 14px 32px rgba(52,64,140,0.14); display: flex; flex-direction: column">
+          <button type="button" class="row" style="display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 12px; border: 0; border-radius: 16px; background: transparent; color: #1B1C22; font: 600 14px Inter, sans-serif; text-align: left; cursor: pointer"><span aria-hidden="true" style="width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(180deg, #FFFFFF 0%, #EEF1FA 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.12), 0 4px 10px rgba(52,64,140,0.12); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B5BDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span><span style="flex: 1">Change password</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#565B70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+          <div style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 0 12px; border-top: 1px solid rgba(40,50,110,0.1)">
+            <span aria-hidden="true" style="width: 34px; height: 34px; flex: none; border-radius: 10px; background: linear-gradient(180deg, #FFFFFF 0%, #EEF1FA 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.12), 0 4px 10px rgba(52,64,140,0.12); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Two-step verification</span><span style="font-size: 12px; color: #565B70">{{twoFaHint}}</span></div>
+            <button type="button" role="switch" aria-checked="{{twoFaChecked}}" aria-label="Two-step verification" onClick="{{toggle2fa}}" style="width: 52px; height: 30px; flex: none; border-radius: 999px; border: 0; padding: 3px; box-sizing: border-box; background: {{twoFaTrack}}; box-shadow: inset 0 1px 3px rgba(40,50,110,0.25); display: flex; justify-content: {{twoFaJustify}}; cursor: pointer"><span style="width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 2px 6px rgba(30,40,90,0.3)"></span></button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-top: 1px solid rgba(40,50,110,0.1)">
+            <span style="font-size: 12px; font-weight: 600; color: #565B70">Signed-in devices</span>
+            <span style="display: flex; justify-content: space-between; font-size: 13px"><span>iPhone · this app</span><span style="color: #3E4257; font-weight: 600">Active now</span></span>
+            <span style="display: flex; justify-content: space-between; font-size: 13px"><span>Chrome · MacBook</span><span style="color: #565B70">2 days ago</span></span>
+          </div>
+        </section>
+        <a href="MobileLogin.dc.html" class="chip" style="height: 50px; border-radius: 14px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font: 600 15px Inter, sans-serif; text-decoration: none; box-shadow: 0 10px 22px rgba(27,28,34,0.28)">Sign out<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="M10 17l5-5-5-5M15 12H3"></path></svg></a>
+        <button type="button" style="height: 44px; border-radius: 14px; border: 1px solid rgba(180,18,63,0.35); background: rgba(229,17,79,0.08); color: #B4123F; font: 600 14px Inter, sans-serif; cursor: pointer">Delete account</button>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'profile', first: '[Your]', last: '[Name]', org: '', phone: '', email: 'you@example.com', emailDraft: 'you@example.com', emailMsg: '', emailOk: true, notice: '',
+      purpose: (() => { let v = null; try { v = window.localStorage.getItem('allot.profile'); } catch (e) {} return v === 'personal' ? 'Personal' : v === 'family' ? 'Family' : 'Business'; })(), theme: 'Light', week: 'Monday', currency: 'EUR (€)', language: 'English', dateFmt: 'DD/MM/YYYY', twoFa: true,
+      notif: { spend: true, budget: true, weekly: true, news: false } };
+  }
+  renderVals() {
+    const st = this.state;
+    const CHIP_BG = 'linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%)';
+    const CHIP_SH = '0 1px 2px rgba(30,40,90,0.14), 0 4px 10px rgba(52,64,140,0.14)';
+    const on = (x) => ({ bg: x ? CHIP_BG : 'transparent', shadow: x ? CHIP_SH : 'none', fg: x ? '#1B1C22' : '#3E4257' });
+    const tabs = [['profile', 'Profile'], ['prefs', 'Preferences'], ['notif', 'Alerts'], ['security', 'Security']].map(([k, l]) => ({ label: l, selected: st.tab === k ? 'true' : 'false', ...on(st.tab === k), pick: () => this.setState({ tab: k }) }));
+    const initials = ((st.first.replace(/[\[\]]/g, '')[0] || '') + (st.last.replace(/[\[\]]/g, '')[0] || '')).toUpperCase() || 'YN';
+    const fld = (key, label, type, ph) => ({ label, type, ph, value: st[key], change: (e) => this.setState({ [key]: e.target.value }) });
+    const fields = [fld('first', 'First name', 'text', ''), fld('last', 'Last name', 'text', ''), fld('org', 'Company / household', 'text', '[Your Company Ltd]'), fld('phone', 'Phone', 'tel', '+31 6 …')];
+    const seg = (key, label, opts) => ({ label, opts: opts.map(o => ({ label: o, checked: st[key] === o ? 'true' : 'false', ...on(st[key] === o), pick: () => this.setState({ [key]: o, notice: label + ': ' + o }) })) });
+    const segs = [seg('theme', 'Appearance', ['Light', 'Dark', 'System']), seg('week', 'Week starts on', ['Monday', 'Sunday'])];
+    const sel = (key, label, options) => ({ label, value: st[key], options, change: (e) => this.setState({ [key]: e.target.value, notice: label + ' updated' }) });
+    const selects = [sel('currency', 'Currency', ['EUR (€)', 'USD ($)', 'GBP (£)', 'CHF']), sel('language', 'Language', ['English', 'Nederlands', 'Italiano', 'Français', 'Deutsch']), sel('dateFmt', 'Date format', ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY-MM-DD'])];
+    const T = [['spend', 'Spending alerts', 'A push for every card payment'], ['budget', 'Budget warnings', 'When a budget passes 80%'], ['weekly', 'Weekly summary', 'Email every ' + st.week + ' morning'], ['news', 'Product news', 'New features and tips']];
+    const toggles = T.map(([k, label, hint], i) => { const v = st.notif[k]; return { label, hint, checked: v ? 'true' : 'false', track: v ? 'linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22)' : 'rgba(40,50,110,0.18)', justify: v ? 'flex-end' : 'flex-start', line: i === 0 ? 'transparent' : 'rgba(40,50,110,0.1)', toggle: () => this.setState({ notif: { ...this.state.notif, [k]: !v }, notice: label + (v ? ' off' : ' on') }) }; });
+    const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    return {
+      tabs, isProfile: st.tab === 'profile', isPrefs: st.tab === 'prefs', isNotif: st.tab === 'notif', isSecurity: st.tab === 'security',
+      initials, displayName: (st.first + ' ' + st.last).trim(), email: st.email, purpose: st.purpose, currency: st.currency,
+      fields, segs, selects, toggles, emailDraft: st.emailDraft,
+      setEmail: (e) => this.setState({ emailDraft: e.target.value, emailMsg: '' }),
+      emailHint: st.emailMsg || 'Receipts, statements and summaries are sent here.',
+      emailHintColor: st.emailMsg ? (st.emailOk ? '#3E4257' : '#B4123F') : '#565B70',
+      updateEmail: () => { const v = st.emailDraft.trim(); if (!validEmail(v)) { this.setState({ emailMsg: 'Enter a valid email, like name@company.com', emailOk: false }); return; } this.setState({ email: v, emailMsg: 'Confirmation link sent to ' + v + '.', emailOk: true, notice: 'Email update requested' }); },
+      saveProfile: () => this.setState({ notice: 'Profile saved' }),
+      hasNotice: !!st.notice, notice: st.notice,
+      twoFaChecked: st.twoFa ? 'true' : 'false', twoFaTrack: st.twoFa ? 'linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22)' : 'rgba(40,50,110,0.18)', twoFaJustify: st.twoFa ? 'flex-end' : 'flex-start',
+      twoFaHint: st.twoFa ? 'On for new devices' : 'Off — we recommend turning it on',
+      toggle2fa: () => this.setState({ twoFa: !st.twoFa, notice: 'Two-step verification ' + (st.twoFa ? 'off' : 'on') })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alocora Wallet — Choose your profile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#C9D2F3}
+a{color:#1B1C22}
+.pcard{transition:transform .2s ease, box-shadow .2s ease}
+.pcard:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.95),0 30px 60px rgba(52,64,140,0.26),0 4px 10px rgba(52,64,140,0.1)}
+.space{position:relative;isolation:isolate;background-color:#EBEDF9;background-image:radial-gradient(ellipse 1800px 700px at -10% 1000px,rgba(255,255,255,.9) 0%,rgba(242,244,252,.6) 36%,transparent 62%),radial-gradient(ellipse 1100px 650px at 100% 0px,rgba(66,92,222,.5),transparent 70%),radial-gradient(ellipse 900px 600px at 0% 300px,rgba(150,124,240,.32),transparent 70%),linear-gradient(170deg,#D6DCF6 0px,#ABBAEE 380px,#90A4E9 640px,#C3CCF2 860px,#EBEDF9 1000px);background-repeat:no-repeat}
+.grad{background:linear-gradient(90deg,#3B5BDB 0%,#7C3AED 52%,#C2418C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+.rv.rv-in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</helmet>
+<div class="space" style="min-height: 100vh; box-sizing: border-box; padding: 40px 24px 64px; font-family: Inter, system-ui, sans-serif; color: #1B1C22; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 36px">
+  <div style="width: 100%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="width: 40px; height: 40px; border-radius: 12px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; letter-spacing: -0.04em; box-shadow: 0 8px 18px rgba(27,28,34,0.25)"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display: block"><path d="M4.5 20 12 4l7.5 16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.3 14.3h7.4" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round"></path><circle cx="12" cy="4.2" r="1.2" fill="#F472B6"></circle></svg></div>
+      <span style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em">Alocora Wallet</span>
+    </div>
+    <span style="display: inline-flex; align-items: center; gap: 10px; font-weight: 500; color: #2E3244">Signed in as [Your Name]<span aria-hidden="true" style="width: 36px; height: 36px; border-radius: 50%; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; box-shadow: 0 0 0 3px #FFFFFF">YN</span></span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; max-width: 640px">
+    <h1 class="grad" style="margin: 0; font-size: 46px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.1">Choose your profile</h1>
+    <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #2E3244">Each profile has its own accounts, cards, budgets and documents. They are kept completely separate — you can switch later in Settings.</p>
+  </div>
+
+  <div style="width: 100%; max-width: 1100px; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px">
+    <sc-for list="{{profiles}}" as="p" hint-placeholder-count="3">
+      <a href="{{p.href}}" onClick="{{p.pick}}" class="pcard" style="text-decoration: none; padding: 26px; border-radius: 26px; background: rgba(255,255,255,0.33); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,0.36); box-shadow: inset 0 1px 0 rgba(255,255,255,0.38), 0 20px 44px rgba(52,64,140,0.18), 0 2px 6px rgba(52,64,140,0.08); display: flex; flex-direction: column; gap: 16px; color: #1B1C22">
+        <span aria-hidden="true" style="width: 60px; height: 60px; border-radius: 18px; background: linear-gradient(180deg, #FFFFFF 0%, #EEF1FA 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 8px 18px rgba(52,64,140,0.16); color: {{p.color}}; display: flex; align-items: center; justify-content: center">
+          <sc-if value="{{p.isBiz}}" hint-placeholder-val="{{true}}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"></path></svg></sc-if>
+          <sc-if value="{{p.isPersonal}}" hint-placeholder-val="{{false}}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></sc-if>
+          <sc-if value="{{p.isFamily}}" hint-placeholder-val="{{false}}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V21H3z"></path><circle cx="9" cy="13" r="1.6"></circle><circle cx="15" cy="13" r="1.6"></circle><path d="M7 19a2 2 0 0 1 4 0M13 19a2 2 0 0 1 4 0"></path></svg></sc-if>
+        </span>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">{{p.title}}</span>
+          <span style="font-size: 14px; line-height: 1.5; color: #3E4257">{{p.desc}}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 4px; border-top: 1px solid rgba(40,50,110,0.1)">
+          <sc-for list="{{p.points}}" as="pt" hint-placeholder-count="3">
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #2E3244; padding-top: 4px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{p.color}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>{{pt}}</span>
+          </sc-for>
+        </div>
+        <span style="margin-top: auto; height: 48px; border-radius: 14px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font: 600 15px Inter, sans-serif; box-shadow: 0 10px 22px rgba(27,28,34,0.25)">Continue as {{p.title}}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      </a>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  initReveal(sel) {
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce || typeof IntersectionObserver === 'undefined' || typeof document === 'undefined') return;
+    this.rvIO = new IntersectionObserver((entries) => {
+      let k = 0;
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.style.transitionDelay = Math.min(k++, 5) * 110 + 'ms';
+        en.target.classList.add('rv-in');
+        this.rvIO.unobserve(en.target);
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+    const scan = () => {
+      let els = [];
+      try { els = document.querySelectorAll(sel); } catch (e) { return; }
+      els.forEach((el) => { if (el.dataset.rv) return; el.dataset.rv = '1'; el.classList.add('rv'); this.rvIO.observe(el); });
+    };
+    scan();
+    try { this.rvMO = new MutationObserver(() => { clearTimeout(this.rvT); this.rvT = setTimeout(scan, 30); }); this.rvMO.observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  }
+  stopReveal() { if (this.rvIO) this.rvIO.disconnect(); if (this.rvMO) this.rvMO.disconnect(); clearTimeout(this.rvT); }
+  componentWillUnmount() { this.stopReveal(); }
+  componentDidMount() { this.initReveal('.space > *'); }
+  renderVals() {
+    const save = (k) => () => { try { window.localStorage.setItem('allot.profile', k); } catch (e) {} };
+    const profiles = [
+      { k: 'business', title: 'Business', href: 'Main.dc.html', color: '#3B5BDB', desc: 'Company expenses, department budgets, projects and business plans.', points: ['Main account + project accounts', 'Department budgets & payroll', 'Project allocation & plan builder'] },
+      { k: 'personal', title: 'Personal', href: 'MainPersonal.dc.html', color: '#7C3AED', desc: 'Your salary, daily and monthly spending, savings goals and plans.', points: ['Salary & bills tracking', 'Monthly spending budgets', 'Savings goals & money plan'] },
+      { k: 'family', title: 'Family', href: 'MainFamily.dc.html', color: '#C2418C', desc: 'A shared household: joint account, family budgets and shared goals.', points: ['Joint account & family pots', 'Groceries, kids & housing budgets', 'Shared goals for everyone'] }
+    ].map(p => ({ ...p, isBiz: p.k === 'business', isPersonal: p.k === 'personal', isFamily: p.k === 'family', pick: save(p.k) }));
+    return { profiles };
+  }
+}
+</script>
+</body>
+</html>

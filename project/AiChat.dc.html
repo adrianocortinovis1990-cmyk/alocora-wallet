@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alocora Wallet — AI assistant</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#C9D2F3}
+@keyframes aiShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.ai-shimmer{background:linear-gradient(90deg,#9095A8 0%,#9095A8 35%,#1B1C22 50%,#9095A8 65%,#9095A8 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:aiShimmer 1.8s linear infinite}
+@keyframes aiSpin{to{transform:rotate(360deg)}}
+.ai-orb{animation:aiSpin 2.4s linear infinite}
+@keyframes aiBreathe{0%,100%{transform:scale(.9)}50%{transform:scale(1.08)}}
+.ai-breathe{animation:aiBreathe 1.6s ease-in-out infinite}
+@keyframes aiDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.ai-dot{animation:aiDot 1.2s ease-in-out infinite}
+@keyframes aiIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ai-in{animation:aiIn .35s ease both}
+@keyframes aiPop{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+.ai-pop{animation:aiPop .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes aiCaret{50%{opacity:0}}
+.ai-caret{animation:aiCaret .9s steps(1) infinite}
+@keyframes aiRing{0%{box-shadow:0 0 0 0 rgba(124,58,237,.45),0 14px 30px rgba(27,28,34,.3)}100%{box-shadow:0 0 0 16px rgba(124,58,237,0),0 14px 30px rgba(27,28,34,.3)}}
+.ai-ring{animation:aiRing 2.4s ease-out infinite}
+.ai-chip:hover{background:#FFFFFF}
+.ai-send:disabled{opacity:.4;cursor:default}
+.ai-list::-webkit-scrollbar{width:0}
+.ai-word{display:inline-block;margin-right:.27em;animation:aiWord .55s cubic-bezier(.2,.7,.2,1) both}
+@keyframes aiWord{from{opacity:0;filter:blur(5px);transform:translateY(4px)}to{opacity:1;filter:blur(0);transform:none}}
+@media (prefers-reduced-motion: reduce){.ai-shimmer,.ai-orb,.ai-breathe,.ai-dot,.ai-in,.ai-pop,.ai-caret,.ai-ring,.ai-word{animation:none}}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: #1B1C22; font-size: 14px">
+  <sc-if value="{{standalone}}" hint-placeholder-val="{{true}}">
+    <div aria-hidden="true" style="position: fixed; inset: 0; background-color: #B7C3EE; background-image: radial-gradient(ellipse 150% 55% at -15% 108%, rgba(255,255,255,.9) 0%, rgba(242,244,252,.65) 34%, transparent 62%), radial-gradient(ellipse 75% 42% at 100% 0%, rgba(66,92,222,.55), transparent 70%), linear-gradient(165deg, #D6DCF6 0%, #ABBAEE 40%, #90A4E9 62%, #C3CCF2 86%, #EBEDF9 100%)"></div>
+  </sc-if>
+
+  <sc-if value="{{closed}}" hint-placeholder-val="{{false}}">
+    <button type="button" onClick="{{open}}" aria-label="Ask Alocora AI" class="ai-ring ai-pop" style="position: fixed; z-index: 60; right: {{L.right}}px; bottom: {{L.bottom}}px; height: 56px; padding: 0 {{L.padR}}px 0 8px; border: 0; border-radius: 999px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); color: #FFFFFF; display: inline-flex; align-items: center; gap: 10px; font: 600 14px Inter, sans-serif; cursor: pointer">
+      <span aria-hidden="true" style="position: relative; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex: none">
+        <span class="ai-orb" style="position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, #3B82F6, #8B5CF6, #EC4899, #F97316, #3B82F6)"></span>
+        <span style="position: absolute; inset: 5px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFFFFF, #E9ECFF 60%, #C9D0F5); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1B1C22"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"></path></svg></span>
+      </span>
+      <sc-if value="{{L.showLabel}}" hint-placeholder-val="{{true}}"><span>Ask Alocora AI</span></sc-if>
+    </button>
+  </sc-if>
+
+  <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">
+    <section role="dialog" aria-label="Alocora AI assistant" class="ai-pop" style="position: {{P.pos}}; z-index: 61; left: {{P.left}}; right: {{P.right}}; top: {{P.top}}; bottom: {{P.bottom}}; width: {{P.width}}; height: {{P.height}}; box-sizing: border-box; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; background: rgba(246,247,253,0.45); -webkit-backdrop-filter: blur(28px) saturate(170%); backdrop-filter: blur(28px) saturate(170%); border: 1px solid rgba(255,255,255,0.38); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 30px 70px rgba(30,40,110,0.32), 0 4px 12px rgba(30,40,110,0.12)">
+      <header style="flex: none; display: flex; align-items: center; gap: 12px; padding: 14px 14px 12px 16px; border-bottom: 1px solid rgba(40,50,110,0.08)">
+        <span aria-hidden="true" style="position: relative; width: 38px; height: 38px; border-radius: 50%; overflow: hidden; flex: none">
+          <span class="ai-orb" style="position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, #3B82F6, #8B5CF6, #EC4899, #F97316, #3B82F6)"></span>
+          <span style="position: absolute; inset: 4px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFFFFF, #E9ECFF 60%, #C9D0F5); display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="#1B1C22"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6z"></path></svg></span>
+        </span>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0">
+          <strong style="font-size: 15px; letter-spacing: -0.01em">Alocora AI</strong>
+          <span style="font-size: 12px; color: #565B70; display: inline-flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: {{statusDot}}"></span>{{statusText}}</span>
+        </div>
+        <button type="button" onClick="{{reset}}" aria-label="New chat" title="New chat" style="width: 40px; height: 40px; border: 0; border-radius: 12px; background: transparent; color: #3E4257; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button>
+        <sc-if value="{{canClose}}" hint-placeholder-val="{{true}}">
+          <button type="button" onClick="{{close}}" aria-label="Close chat" style="width: 40px; height: 40px; border: 0; border-radius: 12px; background: rgba(214,220,242,0.6); color: #1B1C22; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+        </sc-if>
+      </header>
+
+      <div class="ai-list" ref="{{setList}}" aria-live="polite" style="flex: 1; overflow-y: auto; padding: 16px 14px 8px; display: flex; flex-direction: column; gap: 14px">
+        <sc-for list="{{msgs}}" as="m" hint-placeholder-count="3">
+          <sc-if value="{{m.isUser}}" hint-placeholder-val="{{false}}">
+            <div class="ai-in" style="align-self: flex-end; max-width: 80%; padding: 10px 14px; border-radius: 18px 18px 6px 18px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); color: #FFFFFF; font-size: 14px; line-height: 1.45; box-shadow: 0 8px 18px rgba(27,28,34,0.2)">{{m.text}}</div>
+          </sc-if>
+          <sc-if value="{{m.isAi}}" hint-placeholder-val="{{true}}">
+            <div class="ai-in" style="display: flex; gap: 10px; align-items: flex-start; max-width: 92%">
+              <span aria-hidden="true" class="{{m.avClass}}" style="position: relative; flex: none; width: 26px; height: 26px; border-radius: 50%; overflow: hidden; margin-top: 2px">
+                <span class="ai-orb" style="position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, #3B82F6, #8B5CF6, #EC4899, #F97316, #3B82F6)"></span>
+                <span style="position: absolute; inset: 3px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFFFFF, #E2E6FB)"></span>
+              </span>
+              <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+                <sc-if value="{{m.thinking}}" hint-placeholder-val="{{false}}">
+                  <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 4px">
+                    <span style="display: inline-flex; align-items: center; gap: 8px"><span class="ai-shimmer" style="font-size: 14px; font-weight: 600">Thinking</span><span aria-hidden="true" style="display: inline-flex; gap: 3px"><span class="ai-dot" style="width: 4px; height: 4px; border-radius: 50%; background: #7C3AED"></span><span class="ai-dot" style="width: 4px; height: 4px; border-radius: 50%; background: #C2418C; animation-delay: .15s"></span><span class="ai-dot" style="width: 4px; height: 4px; border-radius: 50%; background: #3B5BDB; animation-delay: .3s"></span></span></span>
+                    <span class="ai-in" style="font-size: 12px; color: #6B7085; display: inline-flex; align-items: center; gap: 6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>{{m.status}}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{m.answered}}" hint-placeholder-val="{{true}}">
+                  <sc-if value="{{m.hasThought}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; color: #8A8FA3; display: inline-flex; align-items: center; gap: 5px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{m.thought}}</span></sc-if>
+                  <div style="padding: 10px 14px; border-radius: 6px 18px 18px 18px; background: rgba(255,255,255,0.92); box-shadow: 0 1px 2px rgba(30,40,90,0.08), 0 6px 16px rgba(52,64,140,0.1); font-size: 14px; line-height: 1.55; color: #1B1C22"><sc-for list="{{m.words}}" as="x" hint-placeholder-count="12"><span class="ai-word">{{x.w}}</span></sc-for><sc-if value="{{m.streaming}}" hint-placeholder-val="{{false}}"><span class="ai-caret" aria-hidden="true" style="display: inline-block; width: 7px; height: 15px; margin-left: 0; vertical-align: -2px; border-radius: 2px; background: linear-gradient(180deg, #7C3AED, #3B5BDB)"></span></sc-if></div>
+                  <sc-if value="{{m.hasAction}}" hint-placeholder-val="{{false}}">
+                    <a href="{{m.href}}" class="ai-in" style="align-self: flex-start; height: 34px; padding: 0 12px; border-radius: 11px; display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); color: #FFFFFF; font-size: 12px; font-weight: 600; text-decoration: none; box-shadow: 0 6px 14px rgba(27,28,34,0.22)">{{m.actionLabel}}<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+                  </sc-if>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+        </sc-for>
+        <sc-if value="{{showSuggest}}" hint-placeholder-val="{{true}}">
+          <div class="ai-in" style="display: flex; flex-wrap: wrap; gap: 6px; padding-left: 36px">
+            <sc-for list="{{suggest}}" as="s" hint-placeholder-count="3">
+              <button type="button" class="ai-chip" onClick="{{s.ask}}" style="min-height: 34px; padding: 6px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.95); background: rgba(255,255,255,0.65); box-shadow: 0 2px 6px rgba(52,64,140,0.1); color: #3E4257; font: 500 12px Inter, sans-serif; text-align: left; cursor: pointer">{{s.label}}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+
+      <form onSubmit="{{submit}}" style="flex: none; padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 14px; border-radius: 18px; background: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.95); box-shadow: 0 4px 14px rgba(52,64,140,0.12)">
+          <label style="flex: 1; display: flex"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Ask a question about Alocora</span>
+            <input value="{{draft}}" onChange="{{setDraft}}" placeholder="{{placeholder}}" style="flex: 1; min-width: 0; height: 36px; border: 0; outline: 0; background: transparent; font: 500 14px Inter, sans-serif; color: #1B1C22">
+          </label>
+          <button type="submit" class="ai-send" disabled="{{sendDisabled}}" aria-label="Send" style="width: 40px; height: 40px; flex: none; border: 0; border-radius: 13px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 14px rgba(27,28,34,0.25)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button>
+        </div>
+        <span style="text-align: center; font-size: 11px; color: #8A8FA3">Alocora AI answers questions about the app's features.</span>
+      </form>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"compact":{"type":"boolean","default":false},"$preview":{"width":420,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.web = !props.compact;
+    this.K = [
+      { id: 'hello', k: ['hi', 'hello', 'hey', 'ciao', 'good morning', 'hola'], a: "Hi! I'm Alocora AI. Ask me anything about your wallet: accounts, cards, budgets, savings, projects or documents.", f: ['What is Alocora Wallet?', 'How do profiles work?', 'How do I add an expense?'] },
+      { id: 'what', k: ['what is alocora', 'what is allot', 'what is this', 'what does', 'about alocora', 'alocora', 'what can', 'platform', 'how does it work', 'how it works', 'explain'], a: 'Alocora Wallet is a virtual wallet that keeps your money, budgets, savings, projects and documents in one place. It works for businesses, individuals and families, each in its own separate profile.', f: ['How do profiles work?', 'What can I do with cards?', 'Where are my documents?'] },
+      { id: 'profiles', k: ['profile', 'business', 'personal', 'switch', 'change profile', 'mix'], a: 'After you log in you choose Business, Personal or Family. Each profile has its own accounts, cards and documents, and they never mix. To switch, open Settings and tap Switch profile.', f: ['How does the Family profile work?', 'How do I add an account?'], act: ['Open settings', 'Settings.dc.html', 'MobileSettings.dc.html'] },
+      { id: 'family', k: ['family', 'share', 'partner', 'kids', 'children', 'household', 'joint', 'wife', 'husband'], a: 'The Family profile gives you a joint account with shared pots for groceries, school and home, so the whole household can follow the budget and goals together.', f: ['How do budgets work?', 'Can I set savings goals?'] },
+      { id: 'accounts', k: ['account', 'rename', 'remove', 'delete account', 'secondary', 'new account', 'add account', 'main account'], a: 'You have one main account plus secondary accounts for projects or goals. Tap New account to add one or the pencil to rename it. If you remove one, its balance goes back to the main account.', f: ['What can I do with cards?', 'How do I add money?'] },
+      { id: 'cards', k: ['card', 'smart card', 'virtual', 'debit', 'freeze'], a: 'Every account gets its own virtual card. In Smart cards you browse them with the arrows and see which account each card spends from.', f: ['How do I add an account?', 'How do I add money?'] },
+      { id: 'money', k: ['add money', 'top up', 'topup', 'balance', 'deposit', 'edit balance', 'transfer', 'move money', 'income', 'salary'], a: 'Tap Add money and pick an amount or type your own. On the main account you can also tap Edit balance, and Move lets you shift money between accounts.', f: ['How do I add an expense?', 'What does the growth chart show?'] },
+      { id: 'expense', k: ['expense', 'spend', 'spending', 'log', 'transaction', 'track', 'paid', 'purchase', 'bought'], a: 'Tap Expense, type the amount on the keypad, choose a category and account, then save. It shows up in your transactions and your budget updates straight away.', f: ['How do budgets work?', 'Can I store the receipt?'], act: ['Add an expense', 'Main.dc.html', 'MobileAdd.dc.html'] },
+      { id: 'budget', k: ['budget', 'limit', 'overspend', 'alert', 'pocket', 'category', 'categories'], a: "Budgets are pockets per category, like groceries or marketing. Each one shows what's used and what's left, and Alocora warns you as you get close to the limit.", f: ['Can I set savings goals?', 'How do I add an expense?'] },
+      { id: 'savings', k: ['save', 'saving', 'savings', 'goal', 'emergency', 'holiday', 'grow my money'], a: "Create a savings account for a goal, like a holiday or an emergency fund, and move money into it. You'll see progress towards each goal and your balance growth over time.", f: ['What does the growth chart show?', 'How do I add an account?'] },
+      { id: 'growth', k: ['growth', 'chart', 'graph', 'weekly', 'monthly', 'quarterly', 'increase', 'percentage', 'statistics', 'stats'], a: 'The Balance growth chart shows your net cash flow. Use the menu in its corner to switch between Weekly, Monthly and Quarterly. The percentage compares with the previous period.', f: ['How do budgets work?', 'Can I set savings goals?'] },
+      { id: 'projects', k: ['project', 'allocate', 'allocation', 'resources', 'marketing', 'operations', 'team', 'milestone'], a: 'In Projects you give each project a budget and split it across Marketing, Operations, People and Tools with sliders. You can also track milestones and status.', f: ['How does the business plan work?', 'How do I add an account?'], act: ['Open projects', 'Projects.dc.html', ''] },
+      { id: 'plan', k: ['business plan', 'plan', 'strategy', 'planning', 'forecast'], a: 'The Plan builder guides you through your business plan step by step, from idea and market to costs and goals. It sits next to your real numbers, so your plan stays realistic.', f: ['How do I allocate resources?', 'Where are my documents?'], act: ['Open plan builder', 'Plan.dc.html', ''] },
+      { id: 'docs', k: ['document', 'folder', 'upload', 'file', 'pdf', 'invoice', 'contract', 'store', 'receipt', 'paper', 'scan'], a: 'In Documents you create folders, upload files from your phone or computer and preview them instantly. You can rename or remove folders anytime, and each profile keeps its own files.', f: ['Is my data secure?', 'How do I add an expense?'], act: ['Open documents', 'Documents.dc.html', 'MobileDocs.dc.html'] },
+      { id: 'security', k: ['secure', 'security', 'safe', 'privacy', 'private', 'encrypt', 'password', '2fa', 'two-step', 'hack'], a: 'Your profiles stay separate, documents are stored privately and you can turn on two-step sign-in in Settings under Security. You decide who sees what.', f: ['How do profiles work?', 'Where are my documents?'] },
+      { id: 'mobile', k: ['mobile', 'phone', 'ios', 'android', 'iphone', 'download app', 'web'], a: 'Alocora works on web and mobile. On your phone you get the same cards, budgets and documents, plus quick actions to add money, log expenses and snap receipts.', f: ['How do I add an expense?', 'What can I do with cards?'] },
+      { id: 'price', k: ['price', 'pricing', 'cost', 'free', 'subscription', 'how much'], a: "Pricing isn't set in this preview yet. You can try every feature in the demo for free.", f: ['What is Alocora Wallet?', 'How do profiles work?'] },
+      { id: 'thanks', k: ['thank', 'thanks', 'great', 'perfect', 'awesome', 'nice', 'grazie'], a: "Happy to help! Is there anything else you'd like to know about Alocora?", f: ['How do budgets work?', 'Where are my documents?'] }
+    ];
+    this.fallback = { id: 'fallback', a: "I'm not sure about that one. I can help with accounts, cards, expenses, budgets, savings, projects, business plans and documents.", f: ['What is Alocora Wallet?', 'How do budgets work?', 'Where are my documents?'] };
+    this.timers = [];
+    this.state = { open: !props.embedded || !!props.inline, draft: '', busy: false, msgs: [this.welcome()], follow: ['What is Alocora Wallet?', 'How do profiles work?', 'How do I add an expense?'] };
+  }
+  welcome() { return { role: 'ai', text: "Hi, I'm Alocora AI. Ask me how anything in the app works: accounts, budgets, savings, projects or documents.", done: true, words: 0, thinking: false }; }
+  componentWillUnmount() { this.timers.forEach(t => clearTimeout(t)); }
+  later(fn, ms) { const t = setTimeout(fn, ms); this.timers.push(t); return t; }
+  toBottom() { requestAnimationFrame(() => { if (this.list) this.list.scrollTop = this.list.scrollHeight; }); }
+  match(q) {
+    const s = ' ' + q.toLowerCase().replace(/[^a-z0-9à-ÿ\s'-]/g, ' ') + ' ';
+    let best = null, score = 0;
+    for (const it of this.K) { let sc = 0; for (const k of it.k) if (s.includes(k)) sc += k.length + (k.includes(' ') ? 4 : 0); if (sc > score) { score = sc; best = it; } }
+    return best || this.fallback;
+  }
+  ask(text) {
+    const q = (text || '').trim();
+    if (!q || this.state.busy) return;
+    const it = this.match(q);
+    const thinkMs = 1400 + Math.min(1200, q.length * 22) + Math.floor(Math.random() * 600);
+    const statuses = ['Reading your question', 'Searching Alocora features', 'Checking how it works', 'Writing a short answer'];
+    const words = it.a.split(' ');
+    const msgs = this.state.msgs.concat([{ role: 'user', text: q }, { role: 'ai', thinking: true, status: statuses[0], text: it.a, words: 0, done: false, intent: it }]);
+    this.setState({ msgs, draft: '', busy: true, follow: [] });
+    this.toBottom();
+    const upd = (patch) => { const m = this.state.msgs.slice(); m[m.length - 1] = { ...m[m.length - 1], ...patch }; this.setState({ msgs: m }); };
+    const stepMs = Math.floor(thinkMs / 4);
+    [1, 2, 3].forEach(i => this.later(() => upd({ status: statuses[i] }), stepMs * i));
+    this.later(() => {
+      upd({ thinking: false, thought: 'Thought for ' + Math.max(1, Math.round(thinkMs / 1000)) + 's', words: 1 });
+      this.toBottom();
+      let n = 1;
+      const tick = () => {
+        n += 1;
+        if (n >= words.length) { upd({ words: words.length, done: true }); this.setState({ busy: false, follow: it.f }); this.toBottom(); return; }
+        upd({ words: n });
+        if (n % 4 === 0) this.toBottom();
+        const w = words[n - 1];
+        this.later(tick, 120 + (/[.!?]$/.test(w) ? 420 : /[,:;]$/.test(w) ? 240 : 0) + ((n * 37) % 5) * 22 + (n % 7 === 0 ? 160 : 0) + w.length * 6);
+      };
+      this.later(tick, 260);
+    }, thinkMs);
+  }
+  renderVals() {
+    const st = this.state, p = this.props;
+    const embedded = !!p.embedded, compact = !!p.compact, inline = !!p.inline;
+    const msgs = st.msgs.map((m, i) => {
+      if (m.role === 'user') return { isUser: true, isAi: false, text: m.text, thinking: false, answered: false };
+      const all = m.text.split(' ');
+      const shown = m.done ? all : all.slice(0, m.words);
+      const act = m.intent && m.intent.act;
+      const href = act ? (compact ? act[2] : act[1]) : '';
+      return { isUser: false, isAi: true, thinking: !!m.thinking, answered: !m.thinking, status: (m.status || '') + '…', words: shown.map(w => ({ w })), streaming: !m.done && !m.thinking,
+        hasThought: !!m.thought, thought: m.thought || '', avClass: m.thinking ? 'ai-breathe' : '',
+        hasAction: !!(m.done && href), href, actionLabel: act ? act[0] : '' };
+    });
+    return {
+      standalone: !embedded,
+      closed: !st.open && !inline, isOpen: st.open || inline, canClose: embedded && !inline,
+      L: compact ? { right: 18, bottom: p.bottomOffset ? Number(p.bottomOffset) : 104, padR: 8, showLabel: false } : { right: 28, bottom: 28, padR: 20, showLabel: true },
+      P: inline ? { pos: 'relative', left: 'auto', right: 'auto', top: 'auto', bottom: 'auto', width: '100%', height: '600px' }
+        : compact ? { pos: 'fixed', left: '10px', right: '10px', top: '54px', bottom: '14px', width: 'auto', height: 'auto' }
+        : embedded ? { pos: 'fixed', left: 'auto', right: '28px', top: 'auto', bottom: '28px', width: '390px', height: '580px' }
+        : { pos: 'fixed', left: '14px', right: '14px', top: '14px', bottom: '14px', width: 'auto', height: 'auto' },
+      open: () => { this.setState({ open: true }); this.toBottom(); },
+      close: () => this.setState({ open: false }),
+      reset: () => { this.timers.forEach(t => clearTimeout(t)); this.timers = []; this.setState({ msgs: [this.welcome()], busy: false, draft: '', follow: ['What is Alocora Wallet?', 'How do profiles work?', 'How do I add an expense?'] }); },
+      setList: (el) => { this.list = el; },
+      msgs,
+      statusText: st.busy ? 'Thinking…' : 'Online · answers about Alocora',
+      statusDot: st.busy ? '#7C3AED' : '#3E4257',
+      showSuggest: !st.busy && st.follow.length > 0,
+      suggest: st.follow.map(label => ({ label, ask: () => this.ask(label) })),
+      draft: st.draft, setDraft: (e) => this.setState({ draft: e.target.value }),
+      placeholder: st.busy ? 'Alocora AI is answering…' : 'Ask how Alocora works…',
+      sendDisabled: st.busy || !st.draft.trim(),
+      submit: (e) => { e.preventDefault(); this.ask(this.state.draft); }
+    };
+  }
+}
+</script>
+</body>
+</html>

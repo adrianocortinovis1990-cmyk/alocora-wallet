@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alocora Wallet — Plan builder</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#C9D2F3}
+.space.space.space.space.space{background-color:#EBEDF9;background-image:radial-gradient(ellipse 1800px 900px at -10% 1500px,rgba(255,255,255,.9) 0%,rgba(242,244,252,.6) 36%,transparent 62%),radial-gradient(ellipse 1100px 650px at 100% 0px,rgba(66,92,222,.5),transparent 70%),radial-gradient(ellipse 900px 600px at 0% 420px,rgba(150,124,240,.32),transparent 70%),linear-gradient(170deg,#D6DCF6 0px,#ABBAEE 520px,#90A4E9 900px,#C3CCF2 1250px,#EBEDF9 1600px);background-repeat:no-repeat}
+.space.space.space.space.space::before,.space.space.space.space.space::after{display:none}
+.grad{background:linear-gradient(90deg,#3B5BDB 0%,#7C3AED 52%,#C2418C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+a{color:#338EF7}a:hover{color:#66AAF9}
+.nav-a{color:#565B70;text-decoration:none}
+.nav-a:hover{color:#1B1C22;background:rgba(255,255,255,0.5)}
+.btn:hover{filter:brightness(1.12)}
+input::placeholder,textarea::placeholder{color:#565B70}
+.space.space.space.space{background-color:#08090E;background-image:radial-gradient(ellipse 1500px 1300px at 50% 600px,transparent 58%,rgba(0,0,0,.5) 100%),radial-gradient(ellipse 900px 380px at 12% 0px,rgba(150,185,255,.12),transparent 70%),radial-gradient(ellipse 1500px 720px at 50% 60px,rgba(30,58,150,.45),rgba(16,30,80,.2) 45%,transparent 75%),radial-gradient(ellipse 420px 620px at 30% 640px,rgba(47,107,255,.18),transparent 70%),radial-gradient(ellipse 420px 620px at 70% 640px,rgba(47,107,255,.18),transparent 70%),radial-gradient(ellipse 1000px 500px at 50% 520px,rgba(22,44,120,.2),transparent 72%);background-repeat:no-repeat}
+.space.space.space.space::before{display:none}
+.space.space.space.space::after{top:180px;width:920px;height:960px;margin-left:-460px;border:70px solid rgba(47,107,255,.58);filter:blur(70px);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 28%,#000 66%,transparent 96%);mask-image:linear-gradient(180deg,transparent 0%,#000 28%,#000 66%,transparent 96%)}
+.space.space.space{background-color:#0A0B10;background-image:radial-gradient(ellipse 1500px 1300px at 50% 600px,transparent 55%,rgba(0,0,0,.55) 100%),radial-gradient(ellipse 900px 420px at 12% 0px,rgba(150,185,255,.16),transparent 70%),linear-gradient(118deg,transparent 30%,rgba(110,150,255,.06) 40%,rgba(255,255,255,.03) 44%,transparent 54%),radial-gradient(ellipse 1200px 600px at 50% 0px,rgba(28,56,130,.42),transparent 72%),radial-gradient(ellipse 700px 160px at 50% 1130px,rgba(47,107,255,.26),transparent 70%),radial-gradient(ellipse 900px 500px at 50% 760px,rgba(20,40,120,.14),transparent 72%);background-repeat:no-repeat}
+.space.space.space::before{border-color:#3B7BFF;box-shadow:0 0 22px rgba(90,150,255,.75),0 14px 60px rgba(47,107,255,.45),inset 0 0 14px rgba(170,205,255,.6)}
+.space.space{position:relative;isolation:isolate;background-color:#0B0C10;background-image:radial-gradient(ellipse 1200px 600px at 50% 0px,rgba(28,48,110,.38),transparent 72%),radial-gradient(ellipse 900px 500px at 50% 760px,rgba(20,40,120,.14),transparent 72%)}
+.space.space::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:240px;width:880px;height:880px;margin-left:-440px;box-sizing:border-box;border-radius:50%;border:6px solid #2F6BFF;box-shadow:0 10px 40px rgba(47,107,255,.35);-webkit-mask-image:linear-gradient(180deg,transparent 56%,#000 86%);mask-image:linear-gradient(180deg,transparent 56%,#000 86%)}
+.space.space::after{content:"";position:absolute;z-index:-1;pointer-events:none;left:50%;top:240px;width:880px;height:880px;margin-left:-440px;box-sizing:border-box;border-radius:50%;border:56px solid rgba(47,107,255,.5);filter:blur(60px);-webkit-mask-image:linear-gradient(180deg,transparent 2%,#000 42%,#000 70%,transparent 92%);mask-image:linear-gradient(180deg,transparent 2%,#000 42%,#000 70%,transparent 92%)}
+.space{background-color:#04030B;background-image:radial-gradient(circle at 8% 2%,rgba(255,255,255,.9) 0 1px,transparent 1.6px),radial-gradient(circle at 21% 5%,rgba(255,255,255,.7) 0 1px,transparent 1.6px),radial-gradient(circle at 34% 1.5%,rgba(255,255,255,.8) 0 1.2px,transparent 1.8px),radial-gradient(circle at 47% 4%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 59% 2.5%,rgba(255,255,255,.9) 0 1.3px,transparent 2px),radial-gradient(circle at 71% 6%,rgba(255,255,255,.7) 0 1px,transparent 1.6px),radial-gradient(circle at 83% 2%,rgba(255,255,255,.8) 0 1px,transparent 1.6px),radial-gradient(circle at 93% 5%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 14% 9%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 39% 8%,rgba(255,255,255,.8) 0 1px,transparent 1.6px),radial-gradient(circle at 66% 10%,rgba(255,255,255,.7) 0 1.2px,transparent 1.8px),radial-gradient(circle at 88% 9%,rgba(255,255,255,.8) 0 1px,transparent 1.6px),radial-gradient(circle at 27% 12%,rgba(255,255,255,.5) 0 1px,transparent 1.6px),radial-gradient(circle at 53% 11%,rgba(255,255,255,.6) 0 1px,transparent 1.6px),radial-gradient(circle at 78% 13%,rgba(255,255,255,.5) 0 1px,transparent 1.6px),radial-gradient(ellipse 2600px 2000px at 50% 2140px,#020107 0%,#05041A 50%,#0E0B3E 55.5%,#2A2378 57%,rgba(90,60,190,.12) 58.2%,rgba(70,40,160,.04) 63%,transparent 72%),radial-gradient(ellipse 1100px 220px at 50% 1000px,rgba(120,90,210,.06),transparent 70%),linear-gradient(180deg,#010104 0px,#030209 600px,#07051A 1000px,#020107 1400px);background-repeat:no-repeat}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+.rv.rv-in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</helmet>
+<div class="space" style="min-height: 100vh; box-sizing: border-box; display: flex; flex-wrap: wrap; overflow: hidden; font-family: Inter, system-ui, sans-serif; color: #1B1C22; font-size: 14px">
+
+<nav aria-label="Primary" style="flex: 1 1 232px; box-sizing: border-box; padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.32); background: rgba(255,255,255,0.23); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); display: flex; flex-direction: column; gap: 28px">
+  <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+    <div style="width: 36px; height: 36px; border-radius: 10px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; letter-spacing: -0.04em"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display: block"><path d="M4.5 20 12 4l7.5 16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.3 14.3h7.4" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round"></path><circle cx="12" cy="4.2" r="1.2" fill="#F472B6"></circle></svg></div>
+    <span style="font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Alocora Wallet</span>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 4px">
+    <a href="Main.dc.html" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-weight: 500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>Overview</a>
+    <a href="Projects.dc.html" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-weight: 500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Projects</a>
+    <a href="Plan.dc.html" aria-current="page" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; background: linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%); box-shadow: 0 1px 2px rgba(30,40,90,0.14), 0 6px 14px rgba(52,64,140,0.14); color: #1B1C22; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h5"></path></svg>Plan builder</a>
+    <a href="Documents.dc.html" class="nav-a" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 12px; font-weight: 500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h7l5 5v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M15 3v5h5"></path><path d="M3 7v12a3 3 0 0 0 3 3h9"></path></svg>Documents</a>
+  </div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 24px">
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 class="grad" style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -0.03em">Plan builder</h1>
+      <span style="color: #565B70">Write the plan, set your assumptions, see the next 12 months</span>
+    </div>
+    <div style="display: flex; gap: 10px">
+      <button type="button" style="height: 44px; padding: 0 16px; border: 1px solid rgba(40,50,110,0.18); border-radius: 12px; background: transparent; color: #1B1C22; font: 600 14px Inter, sans-serif; cursor: pointer">Export PDF</button>
+      <button type="button" class="btn" style="height: 44px; padding: 0 18px; border: 0; border-radius: 12px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); box-shadow: 0 10px 22px rgba(27,28,34,0.28), inset 0 1px 0 rgba(255,255,255,0.18); color: #FFFFFF; font: 600 14px Inter, sans-serif; cursor: pointer">Save plan</button>
+    </div>
+  </header>
+
+  <div role="tablist" aria-label="Plan sections" style="display: flex; flex-wrap: wrap; gap: 8px">
+    <sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+      <button type="button" role="tab" aria-selected="{{s.selected}}" onClick="{{s.pick}}" style="height: 40px; padding: 0 14px; border-radius: 12px; border: 1px solid {{s.border}}; background: {{s.bg}}; color: {{s.fg}}; font: 600 13px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px; cursor: pointer"><span style="width: 22px; height: 22px; border-radius: 50%; background: {{s.numBg}}; color: {{s.numFg}}; display: inline-flex; align-items: center; justify-content: center; font-size: 11px">{{s.n}}</span>{{s.label}}</button>
+    </sc-for>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+    <section aria-label="Plan section" style="flex: 999 1 460px; min-width: 0; padding: 24px; border-radius: 20px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); border: 1px solid rgba(255,255,255,0.34); display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-size: 20px; font-weight: 600">{{step.label}}</h2>
+      <p style="margin: 0; color: #565B70; line-height: 1.5">{{step.help}}</p>
+      <sc-for list="{{step.fields}}" as="f" hint-placeholder-count="2">
+        <label style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 13px; color: #C9A9E9; font-weight: 500">{{f.label}}</span>
+          <textarea rows="3" placeholder="{{f.ph}}" style="box-sizing: border-box; width: 100%; padding: 12px 14px; border-radius: 12px; border: 2px solid rgba(40,50,110,0.18); background: rgba(214,220,242,0.6); color: #1B1C22; font: 400 14px/1.5 Inter, sans-serif; resize: vertical"></textarea>
+        </label>
+      </sc-for>
+    </section>
+
+    <section aria-labelledby="assump-h" style="flex: 1 1 320px; padding: 24px; border-radius: 20px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); border: 1px solid rgba(255,255,255,0.34); display: flex; flex-direction: column; gap: 14px">
+      <h2 id="assump-h" style="margin: 0; font-size: 18px; font-weight: 600">Assumptions</h2>
+      <sc-for list="{{inputs}}" as="i" hint-placeholder-count="5">
+        <label style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+          <span style="color: #565B70">{{i.label}}</span>
+          <span style="display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid rgba(40,50,110,0.18); background: rgba(214,220,242,0.6); width: 130px; box-sizing: border-box">
+            <span style="color: #565B70">{{i.pre}}</span>
+            <input type="number" value="{{i.value}}" onChange="{{i.change}}" style="width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #1B1C22; font: 600 14px Inter, sans-serif; text-align: right">
+            <span style="color: #565B70">{{i.post}}</span>
+          </span>
+        </label>
+      </sc-for>
+    </section>
+  </div>
+
+  <section aria-label="Projection summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+    <sc-for list="{{summary}}" as="k" hint-placeholder-count="4">
+      <div style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); border: 1px solid rgba(255,255,255,0.34); display: flex; flex-direction: column; gap: 8px">
+        <span style="color: #565B70; font-size: 13px">{{k.label}}</span>
+        <span style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: {{k.color}}">{{k.value}}</span>
+      </div>
+    </sc-for>
+  </section>
+
+  <section aria-labelledby="proj-h" style="padding: 24px; border-radius: 20px; background: rgba(255,255,255,0.32); -webkit-backdrop-filter: blur(24px) saturate(160%); backdrop-filter: blur(24px) saturate(160%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.36), 0 18px 40px rgba(52,64,140,0.16), 0 2px 6px rgba(52,64,140,0.08); border: 1px solid rgba(255,255,255,0.34); display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+      <h2 id="proj-h" style="margin: 0; font-size: 18px; font-weight: 600">12-month projection</h2>
+      <div style="display: flex; gap: 16px; font-size: 13px; color: #565B70">
+        <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #3B5BDB"></span>Revenue</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #E5114F"></span>Costs</span>
+      </div>
+    </div>
+    <div style="height: 200px; display: flex; align-items: flex-end; gap: 8px; border-bottom: 1px solid rgba(40,50,110,0.12)">
+      <sc-for list="{{months}}" as="mo" hint-placeholder-count="12">
+        <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end; gap: 3px; height: 100%">
+          <div title="{{mo.revTitle}}" style="width: 12px; height: {{mo.revH}}px; border-radius: 4px 4px 1px 1px; background: #3B5BDB"></div>
+          <div title="{{mo.costTitle}}" style="width: 12px; height: {{mo.costH}}px; border-radius: 4px 4px 1px 1px; background: #E5114F"></div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="overflow-x: auto">
+      <table style="border-collapse: collapse; width: 100%; min-width: 980px; font-size: 13px">
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: left; padding: 8px; color: #565B70; font-weight: 500">Month</th>
+            <sc-for list="{{months}}" as="mo" hint-placeholder-count="12"><th scope="col" style="text-align: right; padding: 8px; color: #565B70; font-weight: 500">{{mo.label}}</th></sc-for>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+            <tr style="border-top: 1px solid rgba(40,50,110,0.12)">
+              <th scope="row" style="text-align: left; padding: 10px 8px; font-weight: 600">{{r.label}}</th>
+              <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="12"><td style="text-align: right; padding: 10px 8px; color: {{c.color}}; white-space: nowrap">{{c.v}}</td></sc-for>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  initReveal(sel) {
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce || typeof IntersectionObserver === 'undefined' || typeof document === 'undefined') return;
+    this.rvIO = new IntersectionObserver((entries) => {
+      let k = 0;
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.style.transitionDelay = Math.min(k++, 5) * 110 + 'ms';
+        en.target.classList.add('rv-in');
+        this.rvIO.unobserve(en.target);
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+    const scan = () => {
+      let els = [];
+      try { els = document.querySelectorAll(sel); } catch (e) { return; }
+      els.forEach((el) => { if (el.dataset.rv) return; el.dataset.rv = '1'; el.classList.add('rv'); this.rvIO.observe(el); });
+    };
+    scan();
+    try { this.rvMO = new MutationObserver(() => { clearTimeout(this.rvT); this.rvT = setTimeout(scan, 30); }); this.rvMO.observe(document.body, { childList: true, subtree: true }); } catch (e) {}
+  }
+  stopReveal() { if (this.rvIO) this.rvIO.disconnect(); if (this.rvMO) this.rvMO.disconnect(); clearTimeout(this.rvT); }
+  componentWillUnmount() { this.stopReveal(); }
+  componentDidMount() { this.initReveal('main > *'); }
+  constructor(props) {
+    super(props);
+    this.state = { step: 0, start: 20000, growth: 6, fixed: 14000, mkt: 15, cogs: 30, cash: 50000 };
+  }
+  eur(n) { return (n < 0 ? '−' : '') + new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(Math.abs(n)); }
+  short(n) { const a = Math.abs(n); const s = a >= 1000 ? (a / 1000).toFixed(a >= 100000 ? 0 : 1) + 'k' : String(Math.round(a)); return (n < 0 ? '−€' : '€') + s; }
+  renderVals() {
+    const st = this.state;
+    const S = [
+      { label: 'Summary', help: 'What you do, for whom, and why now. Keep it to a few sentences — you can come back to it.', fields: [['Mission', '[What your company or household is working towards]'], ['The problem you solve', '[Who has the problem and how big it is]']] },
+      { label: 'Market', help: 'Who buys, how many of them there are, and who else serves them.', fields: [['Target customers', '[Describe your ideal customer]'], ['Competitors', '[Main alternatives and how you differ]']] },
+      { label: 'Revenue model', help: 'How money comes in. The assumptions panel turns this into numbers.', fields: [['Pricing', '[Price points and plans]'], ['Sales channels', '[Where customers find and buy from you]']] },
+      { label: 'Costs & resources', help: 'Fixed costs, people and tools. Link them to your accounts and projects so actual spending is tracked against the plan.', fields: [['Team & hiring', '[Roles needed and when]'], ['Key costs', '[Rent, software, suppliers…]']] },
+      { label: 'Milestones', help: 'Dated goals with a budget each. Milestones become projects you can fund from a secondary account.', fields: [['Next 90 days', '[Milestones and owners]'], ['This year', '[Bigger goals]']] }
+    ];
+    const steps = S.map((s, i) => { const on = st.step === i; return { n: i + 1, label: s.label, selected: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#000000' : '#1B1C22', border: on ? '#FFFFFF' : 'rgba(40,50,110,0.18)', numBg: on ? 'linear-gradient(180deg, #4A4E60, #1B1C22)' : 'rgba(40,50,110,0.12)', numFg: on ? '#FFFFFF' : '#1B1C22', pick: () => this.setState({ step: i }) }; });
+    const step = { label: S[st.step].label, help: S[st.step].help, fields: S[st.step].fields.map(([label, ph]) => ({ label, ph })) };
+    const num = (k) => (e) => { const v = Number(e.target.value); this.setState({ [k]: isNaN(v) ? 0 : v }); };
+    const inputs = [
+      ['Revenue, month 1', 'start', '€', ''], ['Monthly growth', 'growth', '', '%'], ['Fixed costs / month', 'fixed', '€', ''],
+      ['Marketing spend', 'mkt', '', '% rev'], ['Cost of sales', 'cogs', '', '% rev'], ['Starting cash', 'cash', '€', '']
+    ].map(([label, k, pre, post]) => ({ label, pre, post, value: st[k], change: num(k) }));
+
+    const names = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
+    let cash = st.cash, breakEven = null, totalRev = 0, totalProfit = 0, lowest = cash;
+    const m = names.map((label, i) => {
+      const rev = st.start * Math.pow(1 + st.growth / 100, i);
+      const cost = st.fixed + rev * (st.mkt + st.cogs) / 100;
+      const profit = rev - cost;
+      cash += profit; totalRev += rev; totalProfit += profit; lowest = Math.min(lowest, cash);
+      if (breakEven === null && profit >= 0) breakEven = label;
+      return { label, rev, cost, profit, cash };
+    });
+    const max = Math.max(1, ...m.map(x => Math.max(x.rev, x.cost)));
+    const months = m.map(x => ({ label: x.label, revH: Math.round(x.rev / max * 180), costH: Math.round(x.cost / max * 180), revTitle: x.label + ' revenue ' + this.eur(x.rev), costTitle: x.label + ' costs ' + this.eur(x.cost) }));
+    const pos = (v) => v >= 0 ? '#3E4257' : '#B4123F';
+    const rows = [
+      { label: 'Revenue', cells: m.map(x => ({ v: this.short(x.rev), color: '#1B1C22' })) },
+      { label: 'Costs', cells: m.map(x => ({ v: this.short(x.cost), color: '#1B1C22' })) },
+      { label: 'Profit', cells: m.map(x => ({ v: this.short(x.profit), color: pos(x.profit) })) },
+      { label: 'Cash', cells: m.map(x => ({ v: this.short(x.cash), color: pos(x.cash) })) }
+    ];
+    const summary = [
+      { label: '12-month revenue', value: this.eur(totalRev), color: '#1B1C22' },
+      { label: '12-month profit', value: this.eur(totalProfit), color: pos(totalProfit) },
+      { label: 'Break-even month', value: breakEven || 'Not within 12 months', color: breakEven ? '#B4123F' : '#B4123F' },
+      { label: 'Lowest cash point', value: this.eur(lowest), color: pos(lowest) }
+    ];
+    return { steps, step, inputs, months, rows, summary };
+  }
+}
+</script>
+</body>
+</html>

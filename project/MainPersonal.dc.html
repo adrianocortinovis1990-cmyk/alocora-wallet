@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alocora Wallet — Personal overview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#C9D2F3}
+a{color:#3B5BDB}a:hover{color:#2B46B8}
+.nav-a{color:#3E4257;text-decoration:none}
+.nav-a:hover{color:#1B1C22;background:rgba(255,255,255,0.45)}
+.chip:hover{filter:brightness(1.03)}
+.chip:active{transform:translateY(1px)}
+.dark:hover{background:#2A2C35}
+input::placeholder{color:#6B7085}
+select option{background:#FFFFFF;color:#1B1C22}
+@keyframes sheen{0%{transform:translateX(-160%) skewX(-18deg)}55%,100%{transform:translateX(420%) skewX(-18deg)}}
+.sheen{position:absolute;top:-10%;bottom:-10%;left:0;width:28%;background:linear-gradient(90deg,transparent,rgba(170,200,255,.14) 42%,rgba(255,255,255,.22) 50%,rgba(170,200,255,.14) 58%,transparent);animation:sheen 5.5s ease-in-out infinite;pointer-events:none}
+@keyframes flow{from{stroke-dashoffset:740}to{stroke-dashoffset:0}}
+.flow{animation:flow 4.5s linear infinite;filter:drop-shadow(0 0 4px rgba(200,225,255,.9))}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 5px rgba(70,120,255,.35),0 0 22px 8px rgba(70,130,255,.6)}50%{box-shadow:0 0 0 10px rgba(70,120,255,.16),0 0 34px 12px rgba(90,150,255,.8)}}
+.ball{animation:pulse 2.2s ease-in-out infinite}
+.menu-btn:hover{background:rgba(150,175,230,0.34)}
+.menu-item:hover{background:rgba(120,160,255,0.18)}
+@media (prefers-reduced-motion: reduce){.sheen,.flow,.ball{animation:none}}
+.space{position:relative;isolation:isolate;background-color:#B7C3EE;background-image:radial-gradient(ellipse 1800px 900px at -10% 1700px,rgba(255,255,255,.9) 0%,rgba(242,244,252,.6) 36%,transparent 62%),radial-gradient(ellipse 1100px 650px at 100% 0px,rgba(66,92,222,.5),transparent 70%),radial-gradient(ellipse 900px 600px at 0% 420px,rgba(150,124,240,.32),transparent 70%),linear-gradient(170deg,#D6DCF6 0px,#ABBAEE 520px,#90A4E9 900px,#C3CCF2 1300px,#EBEDF9 1700px);background-repeat:no-repeat;background-color:#EBEDF9}
+.grad{background:linear-gradient(90deg,#3B5BDB 0%,#7C3AED 52%,#C2418C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dots{background:linear-gradient(115deg,#3B82F6 0%,#6366F1 25%,#A855F7 48%,#EC4899 70%,#F97316 92%);-webkit-mask-image:radial-gradient(circle,#000 2.6px,transparent 3.2px),radial-gradient(ellipse 78% 92% at 46% -6%,#000 0%,rgba(0,0,0,.92) 38%,rgba(0,0,0,.45) 60%,transparent 76%);-webkit-mask-size:12px 12px,100% 100%;-webkit-mask-composite:source-in;mask-image:radial-gradient(circle,#000 2.6px,transparent 3.2px),radial-gradient(ellipse 78% 92% at 46% -6%,#000 0%,rgba(0,0,0,.92) 38%,rgba(0,0,0,.45) 60%,transparent 76%);mask-size:12px 12px,100% 100%;mask-composite:intersect}
+.dots2{background:linear-gradient(115deg,#60A5FA 0%,#818CF8 30%,#C084FC 55%,#F472B6 80%);-webkit-mask-image:radial-gradient(circle,#000 4.2px,transparent 4.8px),radial-gradient(ellipse 42% 72% at 14% 8%,#000 0%,rgba(0,0,0,.7) 45%,transparent 74%);-webkit-mask-size:24px 24px,100% 100%;-webkit-mask-position:6px 6px,0 0;-webkit-mask-composite:source-in;mask-image:radial-gradient(circle,#000 4.2px,transparent 4.8px),radial-gradient(ellipse 42% 72% at 14% 8%,#000 0%,rgba(0,0,0,.7) 45%,transparent 74%);mask-size:24px 24px,100% 100%;mask-position:6px 6px,0 0;mask-composite:intersect}
+@keyframes aiShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.ai-shimmer{background:linear-gradient(90deg,#9095A8 0%,#9095A8 35%,#1B1C22 50%,#9095A8 65%,#9095A8 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:aiShimmer 1.8s linear infinite}
+@keyframes aiSpin{to{transform:rotate(360deg)}}
+.ai-orb{animation:aiSpin 2.4s linear infinite}
+@keyframes aiBreathe{0%,100%{transform:scale(.9)}50%{transform:scale(1.08)}}
+.ai-breathe{animation:aiBreathe 1.6s ease-in-out infinite}
+@keyframes aiDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.ai-dot{animation:aiDot 1.2s ease-in-out infinite}
+@keyframes aiIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ai-in{animation:aiIn .35s ease both}
+@keyframes aiPop{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+.ai-pop{animation:aiPop .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes aiCaret{50%{opacity:0}}
+.ai-caret{animation:aiCaret .9s steps(1) infinite}
+@keyframes aiRing{0%{box-shadow:0 0 0 0 rgba(124,58,237,.45),0 14px 30px rgba(27,28,34,.3)}100%{box-shadow:0 0 0 16px rgba(124,58,237,0),0 14px 30px rgba(27,28,34,.3)}}
+.ai-ring{animation:aiRing 2.4s ease-out infinite}
+.ai-chip:hover{background:#FFFFFF}
+.ai-send:disabled{opacity:.4;cursor:default}
+.ai-list::-webkit-scrollbar{width:0}
+.ai-word{display:inline-block;margin-right:.27em;animation:aiWord .55s cubic-bezier(.2,.7,.2,1) both}
+@keyframes aiWord{from{opacity:0;filter:blur(5px);transform:translateY(4px)}to{opacity:1;filter:blur(0);transform:none}}
+@media (prefers-reduced-motion: reduce){.ai-shimmer,.ai-orb,.ai-breathe,.ai-dot,.ai-in,.ai-pop,.ai-caret,.ai-ring,.ai-word{animation:none}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+.rv.rv-in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</helmet>
+<dc-import name="Main" start-purpose="personal" hint-size="100%,1720px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1720}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

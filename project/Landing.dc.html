@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alocora Wallet — Your virtual wallet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#C9D2F3}
+html{scroll-behavior:smooth}
+.nav-a{color:#3E4257;text-decoration:none;height:40px;padding:0 12px;border-radius:12px;display:inline-flex;align-items:center;font-weight:500;white-space:nowrap}
+.nav-a:hover{color:#1B1C22}
+.chip:hover{filter:brightness(1.03)}
+.chip:active,.dark:active{transform:translateY(1px)}
+.dark:hover{filter:brightness(1.18)}
+.feat{transition:transform .25s ease, box-shadow .25s ease}
+.feat:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.9),0 26px 50px rgba(52,64,140,0.22),0 2px 6px rgba(52,64,140,0.08)}
+.tab:hover{background:rgba(255,255,255,0.55)}
+@keyframes sheen{0%{transform:translateX(-160%) skewX(-18deg)}55%,100%{transform:translateX(420%) skewX(-18deg)}}
+.sheen{position:absolute;top:-10%;bottom:-10%;left:0;width:28%;background:linear-gradient(90deg,transparent,rgba(170,200,255,.14) 42%,rgba(255,255,255,.22) 50%,rgba(170,200,255,.14) 58%,transparent);animation:sheen 5.5s ease-in-out infinite;pointer-events:none}
+@keyframes flow{from{stroke-dashoffset:740}to{stroke-dashoffset:0}}
+.flow{animation:flow 4.5s linear infinite;filter:drop-shadow(0 0 4px rgba(200,225,255,.9))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.float{animation:float 6s ease-in-out infinite}
+.float2{animation:float 7s ease-in-out -2s infinite}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.rise2{animation:rise .8s .15s cubic-bezier(.2,.7,.2,1) both}
+.rise3{animation:rise .8s .3s cubic-bezier(.2,.7,.2,1) both}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.sheen,.flow,.float,.float2,.rise,.rise2,.rise3{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+.space{position:relative;isolation:isolate;background-color:#EBEDF9;background-image:radial-gradient(ellipse 1100px 700px at 100% 0px,rgba(66,92,222,.5),transparent 70%),radial-gradient(ellipse 900px 600px at 0% 380px,rgba(150,124,240,.32),transparent 70%),radial-gradient(ellipse 1200px 800px at 110% 1900px,rgba(66,92,222,.32),transparent 70%),radial-gradient(ellipse 1400px 800px at -10% 2700px,rgba(255,255,255,.85),transparent 62%),linear-gradient(175deg,#D6DCF6 0px,#ABBAEE 620px,#97A9EA 1000px,#C3CCF2 1600px,#D9DEF6 2400px,#EBEDF9 3200px);background-repeat:no-repeat}
+.grad{background:linear-gradient(90deg,#3B5BDB 0%,#7C3AED 52%,#C2418C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dots{background:linear-gradient(115deg,#3B82F6 0%,#5B6CF2 20%,#8B5CF6 38%,#C04BD8 54%,#EC4899 68%,#F97316 88%);-webkit-mask-image:radial-gradient(circle,#000 2.6px,transparent 3.2px),radial-gradient(ellipse 78% 92% at 46% -6%,#000 0%,rgba(0,0,0,.92) 38%,rgba(0,0,0,.45) 60%,transparent 76%);-webkit-mask-size:12px 12px,100% 100%;-webkit-mask-composite:source-in;mask-image:radial-gradient(circle,#000 2.6px,transparent 3.2px),radial-gradient(ellipse 78% 92% at 46% -6%,#000 0%,rgba(0,0,0,.92) 38%,rgba(0,0,0,.45) 60%,transparent 76%);mask-size:12px 12px,100% 100%;mask-composite:intersect}
+.dots2{background:linear-gradient(115deg,#3B82F6 0%,#5B6CF2 20%,#8B5CF6 38%,#C04BD8 54%,#EC4899 68%,#F97316 88%);-webkit-mask-image:radial-gradient(circle,#000 4.2px,transparent 4.8px),radial-gradient(ellipse 42% 72% at 14% 8%,#000 0%,rgba(0,0,0,.7) 45%,transparent 74%);-webkit-mask-size:24px 24px,100% 100%;-webkit-mask-position:6px 6px,0 0;-webkit-mask-composite:source-in;mask-image:radial-gradient(circle,#000 4.2px,transparent 4.8px),radial-gradient(ellipse 42% 72% at 14% 8%,#000 0%,rgba(0,0,0,.7) 45%,transparent 74%);mask-size:24px 24px,100% 100%;mask-position:6px 6px,0 0;mask-composite:intersect}
+.glass{background:rgba(255,255,255,0.32);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,0.34);box-shadow:inset 0 1px 0 rgba(255,255,255,0.36),0 18px 40px rgba(52,64,140,0.16),0 2px 6px rgba(52,64,140,0.08)}
+.btn-dark{background:linear-gradient(180deg,#4A4E60 0%,#1B1C22 100%);color:#FFFFFF;box-shadow:0 10px 22px rgba(27,28,34,0.28),inset 0 1px 0 rgba(255,255,255,0.18);text-decoration:none}
+.btn-light{background:linear-gradient(180deg,#FFFFFF 0%,#F2F4FB 100%);border:1px solid rgba(255,255,255,0.95);box-shadow:0 1px 2px rgba(30,40,90,0.14),0 6px 14px rgba(52,64,140,0.14);color:#1B1C22;text-decoration:none}
+.ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#FFFFFF 0%,#EEF1FA 100%);box-shadow:0 1px 2px rgba(30,40,90,0.12),0 6px 14px rgba(52,64,140,0.16)}
+@keyframes aiShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.ai-shimmer{background:linear-gradient(90deg,#9095A8 0%,#9095A8 35%,#1B1C22 50%,#9095A8 65%,#9095A8 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:aiShimmer 1.8s linear infinite}
+@keyframes aiSpin{to{transform:rotate(360deg)}}
+.ai-orb{animation:aiSpin 2.4s linear infinite}
+@keyframes aiBreathe{0%,100%{transform:scale(.9)}50%{transform:scale(1.08)}}
+.ai-breathe{animation:aiBreathe 1.6s ease-in-out infinite}
+@keyframes aiDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.ai-dot{animation:aiDot 1.2s ease-in-out infinite}
+@keyframes aiIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ai-in{animation:aiIn .35s ease both}
+@keyframes aiPop{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+.ai-pop{animation:aiPop .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes aiCaret{50%{opacity:0}}
+.ai-caret{animation:aiCaret .9s steps(1) infinite}
+@keyframes aiRing{0%{box-shadow:0 0 0 0 rgba(124,58,237,.45),0 14px 30px rgba(27,28,34,.3)}100%{box-shadow:0 0 0 16px rgba(124,58,237,0),0 14px 30px rgba(27,28,34,.3)}}
+.ai-ring{animation:aiRing 2.4s ease-out infinite}
+.ai-chip:hover{background:#FFFFFF}
+.ai-send:disabled{opacity:.4;cursor:default}
+.ai-list::-webkit-scrollbar{width:0}
+.ai-word{display:inline-block;margin-right:.27em;animation:aiWord .55s cubic-bezier(.2,.7,.2,1) both}
+@keyframes aiWord{from{opacity:0;filter:blur(5px);transform:translateY(4px)}to{opacity:1;filter:blur(0);transform:none}}
+@media (prefers-reduced-motion: reduce){.ai-shimmer,.ai-orb,.ai-breathe,.ai-dot,.ai-in,.ai-pop,.ai-caret,.ai-ring,.ai-word{animation:none}}
+</style>
+</helmet>
+<div class="space" style="min-height: 100vh; box-sizing: border-box; overflow: hidden; font-family: Inter, system-ui, sans-serif; color: #1B1C22; font-size: 15px">
+
+<header style="position: sticky; top: 0; z-index: 20; padding: 12px 48px 0">
+  <nav aria-label="Primary" style="max-width: 1240px; margin: 0 auto; box-sizing: border-box; height: 68px; padding: 0 4px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+    <a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1C22">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; letter-spacing: -0.04em; box-shadow: 0 8px 18px rgba(27,28,34,0.25)"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display: block"><path d="M4.5 20 12 4l7.5 16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.3 14.3h7.4" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round"></path><circle cx="12" cy="4.2" r="1.2" fill="#F472B6"></circle></svg></span>
+      <span style="font-size: 19px; font-weight: 700; letter-spacing: -0.02em">Alocora Wallet</span>
+    </a>
+    <div ref="{{setNavBox}}" onMouseLeave="{{navLeave}}" style="position: relative; display: flex; gap: 2px; flex-wrap: nowrap; white-space: nowrap">
+      <span aria-hidden="true" style="position: absolute; top: 0; left: {{pill.x}}px; width: {{pill.w}}px; height: 40px; border-radius: 999px; opacity: {{pill.op}}; background: linear-gradient(180deg, rgba(255,255,255,0.42), rgba(255,255,255,0.16)); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%); border: 1px solid rgba(255,255,255,0.45); box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(255,255,255,0.12), 0 8px 20px rgba(52,64,140,0.16); transition: left .55s cubic-bezier(.3,1.35,.45,1), width .55s cubic-bezier(.3,1.35,.45,1), opacity .3s; pointer-events: none; box-sizing: border-box"></span>
+      <sc-for list="{{navItems}}" as="n" hint-placeholder-count="6">
+        <a href="{{n.href}}" ref="{{n.setRef}}" onMouseEnter="{{n.enter}}" onClick="{{n.click}}" aria-current="{{n.cur}}" class="nav-a" style="position: relative; color: {{n.color}}; font-weight: {{n.fw}}; transition: color .3s">{{n.label}}</a>
+      </sc-for>
+    </div>
+    <div style="display: flex; gap: 8px">
+      <a href="Login.dc.html" class="dark btn-dark" style="white-space: nowrap; height: 44px; padding: 0 18px; border-radius: 13px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px">Open your wallet<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<section class="reveal" aria-labelledby="hero-h" style="max-width: 1240px; margin: 0 auto; padding: 72px 48px 96px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 48px 56px">
+  <div style="flex: 1 1 100%; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; margin-bottom: -8px">
+    <span class="rise" style="align-self: center; height: 34px; padding: 0 14px 0 6px; border-radius: 999px; display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.85); box-shadow: 0 4px 12px rgba(52,64,140,0.12); font-size: 13px; font-weight: 500; color: #3E4257"><span style="height: 24px; padding: 0 10px; border-radius: 999px; background: #1B1C22; color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; display: inline-flex; align-items: center">NEW</span>Business, Personal &amp; Family profiles</span>
+    <h1 id="hero-h" class="rise" style="margin: 0; font-size: 62px; line-height: 1.06; font-weight: 800; letter-spacing: -0.045em; text-align: center"><span style="display: block; white-space: nowrap">One virtual wallet for every</span><span class="grad" style="display: block; white-space: nowrap">euro, plan and document.</span></h1>
+  </div>
+  <div style="flex: 1 1 520px; display: flex; flex-direction: column; gap: 26px">
+    <p class="rise2" style="margin: 0; max-width: 540px; font-size: 19px; line-height: 1.6; color: #3E4257">Alocora Wallet gives you a main account and a smart card for every project, goal or household pot. Track expenses, set budgets, grow your savings, plan ahead and keep every receipt and contract in one safe place.</p>
+    <div class="rise3" style="display: flex; flex-wrap: wrap; gap: 12px">
+      <a href="Login.dc.html" class="dark btn-dark" style="height: 56px; padding: 0 26px; border-radius: 16px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px">Get started free<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <a href="#how" class="chip btn-light" style="height: 56px; padding: 0 24px; border-radius: 16px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="#1B1C22" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>See what it does</a>
+    </div>
+    <dl class="rise3" style="margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 36px">
+      <div style="display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 13px; color: #565B70">Accounts &amp; smart cards</dt><dd style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.03em">Unlimited</dd></div>
+      <div style="display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 13px; color: #565B70">Profiles, never mixed</dt><dd style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.03em">3</dd></div>
+      <div style="display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 13px; color: #565B70">Document storage</dt><dd style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.03em">Built in</dd></div>
+    </dl>
+  </div>
+
+  <div aria-hidden="true" style="flex: 1 1 480px; position: relative; height: 560px">
+    <div class="glass" style="position: absolute; left: 30px; right: 10px; top: 20px; bottom: 30px; border-radius: 32px; background: rgba(255,255,255,0.3)"></div>
+    <div class="float" style="position: absolute; left: 60px; top: 60px; width: 400px; height: 248px; border-radius: 22px; overflow: hidden; background: #0B0B0F; box-shadow: 0 30px 60px rgba(20,24,60,0.42), inset 0 1px 0 rgba(255,255,255,0.08); color: #FFFFFF">
+      <span class="dots2" style="position: absolute; inset: 0"></span>
+      <span class="dots" style="position: absolute; inset: 0"></span>
+      <span style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 28px; padding: 0 20px; border-radius: 0 0 13px 13px; background: rgba(40,40,48,0.85); border: 1px solid rgba(255,255,255,0.1); border-top: 0; font: 600 10px/28px Inter, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #E4E4E7">Debit card</span>
+      <span style="position: absolute; top: 22px; right: 22px; width: 40px; height: 30px; border-radius: 7px; background: linear-gradient(135deg, #D4D4D8, #8E8E96); box-shadow: inset 0 0 0 1px rgba(0,0,0,0.25)"></span>
+      <span style="position: absolute; right: 24px; top: 84px; font: 600 18px Inter, sans-serif; letter-spacing: 0.12em; text-shadow: 0 1px 4px rgba(0,0,0,0.6)">****&nbsp; ****&nbsp; ****&nbsp; 4821</span>
+      <span style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; padding: 30px 22px 20px; background: linear-gradient(0deg, rgba(11,11,15,0.92), rgba(11,11,15,0.5) 60%, transparent)">
+        <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: #D4D4D8">Main account · EUR</span><span style="font: 700 38px/1 Inter, sans-serif; letter-spacing: -0.035em">€24,860<span style="font-size: 22px; color: #C9CED9">.20</span></span></span>
+        <span style="font: 300 22px Inter, sans-serif; letter-spacing: 0.06em">Alocora</span>
+      </span>
+    </div>
+    <div class="float2" style="position: absolute; right: 0; top: 270px; width: 300px; height: 200px; border-radius: 24px; overflow: hidden; background: radial-gradient(ellipse 100% 60% at 25% -5%, rgba(45,95,200,0.5), transparent 68%), linear-gradient(180deg, #0A1229 0%, #060A16 45%, #0E2552 86%, #3E7BEA 97%, #8CB8FF 100%); border: 1px solid rgba(140,175,255,0.22); box-shadow: inset 0 -18px 34px -12px rgba(110,170,255,0.75), 0 26px 50px rgba(20,40,120,0.36); color: #FFFFFF">
+      <svg viewBox="0 0 400 200" preserveAspectRatio="none" style="position: absolute; left: 0; top: 30px; width: 100%; height: 100px; overflow: visible; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)">
+        <defs><linearGradient id="lpLine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9CC0FF"></stop><stop offset="1" stop-color="#3F6FD8"></stop></linearGradient></defs>
+        <path d="M0,150 C60,150 80,120 130,118 C180,116 200,150 250,120 C300,90 330,50 400,40" fill="none" stroke="url(#lpLine)" stroke-width="4" stroke-linecap="round" vector-effect="non-scaling-stroke" style="filter: drop-shadow(0 0 6px rgba(90,150,255,0.7))"></path>
+        <path class="flow" d="M0,150 C60,150 80,120 130,118 C180,116 200,150 250,120 C300,90 330,50 400,40" fill="none" stroke="rgba(235,244,255,0.9)" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke-dasharray="36 700"></path>
+      </svg>
+      <span class="sheen"></span>
+      <span style="position: absolute; left: 0; right: 0; bottom: 20px; display: flex; flex-direction: column; align-items: center; gap: 2px"><span style="font-size: 12px; color: #C4CCDD">Balance growth</span><span style="font-size: 34px; font-weight: 600; letter-spacing: -0.03em; line-height: 1">+8.4%</span></span>
+    </div>
+    <div class="glass float2" style="position: absolute; left: 0; top: 340px; width: 250px; box-sizing: border-box; padding: 16px; border-radius: 20px; display: flex; flex-direction: column; gap: 10px">
+      <span style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600"><span>Groceries budget</span><span style="color: #565B70">72%</span></span>
+      <span style="height: 8px; border-radius: 999px; background: rgba(214,220,242,0.6); box-shadow: inset 0 1px 3px rgba(40,50,110,0.18); overflow: hidden"><span style="display: block; width: 72%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22)"></span></span>
+      <span style="font-size: 12px; color: #565B70">€168 left · resets in 9 days</span>
+    </div>
+    <div class="glass float" style="position: absolute; left: 150px; bottom: 0; height: 60px; box-sizing: border-box; padding: 0 16px 0 10px; border-radius: 18px; display: flex; align-items: center; gap: 12px">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: rgba(194,65,140,0.12); color: #C2418C; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg></span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600">Invoice_Oct.pdf saved</span><span style="font-size: 12px; color: #565B70">Receipts · 2 min ago</span></span>
+    </div>
+  </div>
+</section>
+
+<section class="reveal" id="why" aria-labelledby="why-h" style="max-width: 1240px; margin: 0 auto; padding: 20px 48px 110px; box-sizing: border-box; display: flex; flex-direction: column; gap: 48px">
+  <div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-end; justify-content: space-between">
+    <div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 16px">
+      <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C3AED">Why Alocora</span>
+      <h2 id="why-h" style="margin: 0; font-size: 50px; line-height: 1.06; font-weight: 800; letter-spacing: -0.045em">A tool that helps <span class="grad">businesses, people and families grow</span></h2>
+    </div>
+    <p style="flex: 1 1 400px; margin: 0; font-size: 17px; line-height: 1.65; color: #3E4257">Money gets easier when everything lives in one place. Alocora organizes your money, plans, expenses, projects and documents, so you spend less time searching and more time moving forward.</p>
+  </div>
+
+  <div aria-label="What Alocora organizes" style="position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 26px; border-radius: 28px; background: rgba(255,255,255,0.28); border: 1px solid rgba(255,255,255,0.25); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px)">
+    <sc-for list="{{organize}}" as="o" hint-placeholder-count="5">
+      <span style="display: inline-flex; align-items: center; gap: 10px">
+        <span class="chip btn-light" style="height: 52px; padding: 0 20px 0 8px; border-radius: 16px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 12px; font-weight: 700; font-size: 16px"><span aria-hidden="true" style="width: 36px; height: 36px; border-radius: 11px; background: {{o.bg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; box-shadow: 0 6px 14px rgba(27,28,34,0.2)">{{o.i}}</span>{{o.l}}</span>
+        <sc-if value="{{o.arrow}}" hint-placeholder-val="{{true}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9095A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></sc-if>
+      </span>
+    </sc-for>
+    <span style="display: inline-flex; align-items: center; gap: 10px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9095A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9h14M5 15h14"></path></svg><span class="btn-dark" style="height: 52px; padding: 0 22px; border-radius: 16px; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></svg>Growth</span></span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px">
+    <sc-for list="{{audiences}}" as="a" hint-placeholder-count="3">
+      <article class="glass feat" style="box-sizing: border-box; padding: 26px; border-radius: 28px; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 15px; background: {{a.bg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; box-shadow: 0 10px 22px rgba(27,28,34,0.22)">{{a.i}}</span>
+          <span style="display: flex; flex-direction: column; gap: 2px"><h3 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em">{{a.title}}</h3><span style="font-size: 13px; color: #565B70">{{a.tag}}</span></span>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #3E4257">{{a.body}}</p>
+        <div aria-hidden="true" style="padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 8px 18px rgba(52,64,140,0.1); display: flex; flex-direction: column; gap: 10px">
+          <span style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 12px; color: #565B70; font-weight: 600">{{a.metric}}</span><span style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em">{{a.value}}</span></span>
+          <span style="display: flex; align-items: flex-end; gap: 5px; height: 54px">
+            <sc-for list="{{a.bars}}" as="b" hint-placeholder-count="8"><span style="flex: 1; height: {{b.h}}%; border-radius: 6px 6px 3px 3px; background: {{b.c}}"></span></sc-for>
+          </span>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px">
+          <sc-for list="{{a.points}}" as="p" hint-placeholder-count="3">
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3E4257" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>{{p}}</li>
+          </sc-for>
+        </ul>
+      </article>
+    </sc-for>
+  </div>
+
+  <blockquote style="margin: 0; position: relative; overflow: hidden; padding: 40px 48px; border-radius: 30px; background: radial-gradient(ellipse 80% 90% at 10% -20%, rgba(45,95,200,0.55), transparent 65%), linear-gradient(180deg, #0A1229 0%, #060A16 50%, #0B1B3E 85%, #2F64D6 100%); box-shadow: inset 0 -20px 40px -14px rgba(110,170,255,0.7), 0 26px 50px rgba(20,40,120,0.28); color: #FFFFFF; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between">
+    <span class="sheen" aria-hidden="true"></span>
+    <p style="position: relative; margin: 0; flex: 1 1 560px; font-size: 26px; line-height: 1.4; font-weight: 600; letter-spacing: -0.02em">“Our mission is simple: give every euro a purpose, every plan a path and every document a home, so people can stop worrying about money and start growing.”</p>
+    <span style="position: relative; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: #C4CCDD"><strong style="color: #FFFFFF; font-size: 16px">The Alocora team</strong>Built for growth</span>
+  </blockquote>
+</section>
+
+<section class="reveal" id="features" aria-labelledby="feat-h" style="max-width: 1240px; margin: 0 auto; padding: 40px 48px 100px; box-sizing: border-box; display: flex; flex-direction: column; gap: 44px">
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px">
+    <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #3B5BDB">Everything in one wallet</span>
+    <h2 id="feat-h" style="margin: 0; max-width: 760px; font-size: 48px; line-height: 1.08; font-weight: 800; letter-spacing: -0.04em">Manage money the way you <span class="grad">actually live and work</span></h2>
+    <p style="margin: 0; max-width: 620px; font-size: 17px; line-height: 1.6; color: #3E4257">From daily coffee to a company launch, Alocora keeps spending, saving and paperwork together, so you always know where you stand.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px">
+    <sc-for list="{{features}}" as="f" hint-placeholder-count="6">
+      <article class="glass feat" style="box-sizing: border-box; padding: 28px; border-radius: 26px; display: flex; flex-direction: column; gap: 14px">
+        <div aria-hidden="true" style="position: relative; height: 132px; border-radius: 18px; overflow: hidden; background: rgba(214,220,242,0.45); box-shadow: inset 0 1px 3px rgba(40,50,110,0.14); display: flex; align-items: center; justify-content: center; padding: 14px; box-sizing: border-box">
+          <sc-if value="{{f.isWallet}}" hint-placeholder-val="{{false}}">
+            <div style="position: relative; width: 200px; height: 118px; border-radius: 14px; overflow: hidden; background: #0B0B0F; box-shadow: 0 12px 24px rgba(20,24,60,0.35); color: #FFFFFF; transform: rotate(-4deg) translateX(-14px)">
+              <span class="dots2" style="position: absolute; inset: 0"></span><span class="dots" style="position: absolute; inset: 0"></span>
+              <span style="position: absolute; left: 12px; bottom: 10px; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 9px; color: #D4D4D8">Main account</span><span style="font: 700 18px/1 Inter, sans-serif">€24,860</span></span>
+              <span style="position: absolute; right: 12px; bottom: 10px; font: 300 12px Inter, sans-serif; letter-spacing: 0.06em">Alocora</span>
+            </div>
+            <div style="position: absolute; right: 30px; top: 30px; width: 130px; height: 80px; border-radius: 12px; overflow: hidden; background: #0B0B0F; box-shadow: 0 12px 24px rgba(20,24,60,0.35); color: #FFFFFF; transform: rotate(6deg)">
+              <span class="dots" style="position: absolute; inset: 0"></span>
+              <span style="position: absolute; left: 10px; bottom: 8px; font-size: 9px; color: #D4D4D8">Spring Launch</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{f.isExpense}}" hint-placeholder-val="{{false}}">
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 6px">
+              <sc-for list="{{demoTx}}" as="t" hint-placeholder-count="3">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 12px; background: rgba(255,255,255,0.85); box-shadow: 0 2px 6px rgba(52,64,140,0.1)"><span style="width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(180deg, #FFFFFF, #EEF1FA); box-shadow: 0 1px 3px rgba(30,40,90,0.15); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #3B5BDB">{{t.i}}</span><span style="flex: 1; font-size: 12px; font-weight: 500">{{t.n}}</span><span style="font-size: 12px; font-weight: 600; color: {{t.c}}">{{t.a}}</span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{f.isBudget}}" hint-placeholder-val="{{false}}">
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 10px">
+              <sc-for list="{{demoBudgets}}" as="b" hint-placeholder-count="3">
+                <div style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600"><span>{{b.n}}</span><span style="color: {{b.tc}}">{{b.p}}%</span></span><span style="height: 7px; border-radius: 999px; background: rgba(255,255,255,0.7); overflow: hidden"><span style="display: block; width: {{b.p}}%; height: 100%; border-radius: 999px; background: {{b.bar}}"></span></span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{f.isSavings}}" hint-placeholder-val="{{false}}">
+            <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 100% 60% at 25% -5%, rgba(45,95,200,0.5), transparent 68%), linear-gradient(180deg, #0A1229 0%, #060A16 50%, #0E2552 86%, #3E7BEA 100%); color: #FFFFFF">
+              <svg viewBox="0 0 400 200" preserveAspectRatio="none" style="position: absolute; left: 0; top: 14px; width: 100%; height: 80px"><path d="M0,170 C70,165 100,130 160,128 C220,126 250,150 300,100 C340,60 370,40 400,30" fill="none" stroke="#9CC0FF" stroke-width="3.5" vector-effect="non-scaling-stroke" style="filter: drop-shadow(0 0 5px rgba(90,150,255,0.8))"></path><path class="flow" d="M0,170 C70,165 100,130 160,128 C220,126 250,150 300,100 C340,60 370,40 400,30" fill="none" stroke="rgba(235,244,255,0.9)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-dasharray="36 700"></path></svg>
+              <span style="position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font-size: 22px; font-weight: 600">+€420 <span style="font-size: 11px; color: #AEB8CC; font-weight: 500">saved this month</span></span>
+            </div>
+          </sc-if>
+          <sc-if value="{{f.isProjects}}" hint-placeholder-val="{{false}}">
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 10px">
+              <span style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600"><span>Spring Launch</span><span style="color: #565B70">€18,500</span></span>
+              <span style="display: flex; height: 12px; border-radius: 999px; overflow: hidden; gap: 2px"><span style="width: 38%; background: linear-gradient(90deg, #3B5BDB, #5B7BF0)"></span><span style="width: 24%; background: linear-gradient(90deg, #7C3AED, #9B5CF6)"></span><span style="width: 22%; background: linear-gradient(90deg, #C2418C, #E05AA8)"></span><span style="width: 16%; background: linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22)"></span></span>
+              <span style="display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 10px; color: #3E4257"><span>● Marketing 38%</span><span>● Operations 24%</span><span>● People 22%</span><span>● Tools 16%</span></span>
+            </div>
+          </sc-if>
+          <sc-if value="{{f.isDocs}}" hint-placeholder-val="{{false}}">
+            <div style="width: 100%; display: flex; gap: 8px; align-items: flex-end">
+              <sc-for list="{{demoDocs}}" as="d" hint-placeholder-count="3">
+                <div style="flex: 1; height: 100px; border-radius: 10px; background: rgba(255,255,255,0.9); box-shadow: 0 4px 10px rgba(52,64,140,0.12); padding: 7px; box-sizing: border-box; display: flex; flex-direction: column; gap: 5px; transform: rotate({{d.r}}deg)"><span style="flex: 1; border-radius: 6px; background: repeating-linear-gradient(180deg, rgba(40,50,110,0.1) 0 4px, transparent 4px 9px), #F6F7FC; position: relative"><span style="position: absolute; top: 4px; left: 4px; padding: 0 5px; border-radius: 4px; background: {{d.b}}; color: #FFFFFF; font-size: 8px; font-weight: 700; line-height: 14px">{{d.t}}</span></span><span style="font-size: 9px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.n}}</span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <h3 style="margin: 4px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em">{{f.title}}</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #3E4257">{{f.body}}</p>
+        <ul style="margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px">
+          <sc-for list="{{f.points}}" as="p" hint-placeholder-count="3">
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #1B1C22"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3E4257" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="m5 12 5 5L20 7"></path></svg>{{p}}</li>
+          </sc-for>
+        </ul>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<section class="reveal" id="profiles" aria-labelledby="prof-h" style="max-width: 1240px; margin: 0 auto; padding: 0 48px 100px; box-sizing: border-box">
+  <div class="glass" style="border-radius: 34px; padding: 48px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+    <div style="flex: 1 1 440px; display: flex; flex-direction: column; gap: 20px">
+      <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C3AED">Who it's for</span>
+      <h2 id="prof-h" style="margin: 0; font-size: 44px; line-height: 1.08; font-weight: 800; letter-spacing: -0.04em">Three profiles. <span class="grad">Never mixed.</span></h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E4257">Pick Business, Personal or Family when you sign in. Each profile has its own accounts, cards, budgets and documents. Your company spending never ends up next to the family groceries.</p>
+      <div role="tablist" aria-label="Profiles" style="display: flex; gap: 6px; padding: 5px; border-radius: 16px; background: rgba(214,220,242,0.6); box-shadow: inset 0 1px 3px rgba(40,50,110,0.18); align-self: flex-start">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+          <button type="button" role="tab" aria-selected="{{t.sel}}" class="tab" onClick="{{t.pick}}" style="height: 44px; padding: 0 20px; border: 0; border-radius: 12px; background: {{t.bg}}; box-shadow: {{t.sh}}; color: #1B1C22; font: 600 14px Inter, sans-serif; cursor: pointer">{{t.label}}</button>
+        </sc-for>
+      </div>
+      <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px">
+        <sc-for list="{{prof.points}}" as="p" hint-placeholder-count="4">
+          <li style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.5"><span aria-hidden="true" style="flex: none; width: 24px; height: 24px; border-radius: 8px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; margin-top: 1px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg></span>{{p}}</li>
+        </sc-for>
+      </ul>
+      <a href="{{prof.href}}" class="dark btn-dark" style="align-self: flex-start; height: 50px; padding: 0 22px; border-radius: 14px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px">Start with {{prof.label}}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 14px" aria-label="{{prof.label}} profile example">
+      <div style="position: relative; height: 230px; border-radius: 22px; overflow: hidden; background: #0B0B0F; box-shadow: 0 24px 48px rgba(20,24,60,0.38); color: #FFFFFF">
+        <span class="dots2" aria-hidden="true" style="position: absolute; inset: 0"></span>
+        <span class="dots" aria-hidden="true" style="position: absolute; inset: 0"></span>
+        <span style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 26px; padding: 0 18px; border-radius: 0 0 12px 12px; background: rgba(40,40,48,0.85); border: 1px solid rgba(255,255,255,0.1); border-top: 0; font: 600 10px/26px Inter, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #E4E4E7">{{prof.label}} profile</span>
+        <span aria-hidden="true" style="position: absolute; top: 20px; right: 20px; width: 36px; height: 27px; border-radius: 6px; background: linear-gradient(135deg, #D4D4D8, #8E8E96)"></span>
+        <span style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; padding: 30px 22px 20px; background: linear-gradient(0deg, rgba(11,11,15,0.92), rgba(11,11,15,0.5) 60%, transparent)">
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: #D4D4D8">{{prof.account}} · EUR</span><span style="font: 700 36px/1 Inter, sans-serif; letter-spacing: -0.035em">{{prof.balance}}</span></span>
+          <span style="font: 300 21px Inter, sans-serif; letter-spacing: 0.06em">Alocora</span>
+        </span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+        <sc-for list="{{prof.pots}}" as="p" hint-placeholder-count="3">
+          <div style="box-sizing: border-box; padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 8px 18px rgba(52,64,140,0.12); display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 12px; color: #565B70; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.name}}</span>
+            <span style="font-size: 18px; font-weight: 700; letter-spacing: -0.02em">{{p.amt}}</span>
+            <span style="height: 6px; border-radius: 999px; background: rgba(214,220,242,0.8); overflow: hidden"><span style="display: block; width: {{p.pct}}%; height: 100%; border-radius: 999px; background: {{p.bar}}"></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal" id="documents" aria-labelledby="docs-h" style="max-width: 1240px; margin: 0 auto; padding: 0 48px 100px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+  <div aria-hidden="true" style="flex: 1 1 480px; position: relative; height: 420px">
+    <div class="glass" style="position: absolute; inset: 0; border-radius: 30px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; gap: 8px">
+        <sc-for list="{{folders}}" as="f" hint-placeholder-count="4">
+          <span style="height: 36px; padding: 0 14px; border-radius: 11px; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; background: {{f.bg}}; color: {{f.fg}}; box-shadow: {{f.sh}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>{{f.name}}</span>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; flex: 1">
+        <sc-for list="{{docs}}" as="d" hint-placeholder-count="6">
+          <div style="border-radius: 16px; background: rgba(255,255,255,0.82); box-shadow: 0 6px 14px rgba(52,64,140,0.12); padding: 12px; display: flex; flex-direction: column; gap: 8px">
+            <span style="flex: 1; min-height: 60px; border-radius: 10px; background: repeating-linear-gradient(180deg, rgba(40,50,110,0.1) 0 6px, transparent 6px 14px), #F6F7FC; position: relative"><span style="position: absolute; top: 8px; left: 8px; height: 20px; padding: 0 7px; border-radius: 6px; background: {{d.badge}}; color: #FFFFFF; font-size: 10px; font-weight: 700; line-height: 20px">{{d.type}}</span></span>
+            <span style="font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.name}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  <div style="flex: 1 1 440px; display: flex; flex-direction: column; gap: 20px">
+    <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #C2418C">Document vault</span>
+    <h2 id="docs-h" style="margin: 0; font-size: 44px; line-height: 1.08; font-weight: 800; letter-spacing: -0.04em">Every receipt and contract, <span class="grad">right next to your money</span></h2>
+    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #3E4257">Upload invoices, receipts, contracts, payslips and warranties. Sort them into folders, preview them instantly and find them again when tax season or a claim comes around.</p>
+    <ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px">
+      <li style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 15px">Folders you control</strong><span style="font-size: 14px; color: #565B70">Create, rename and remove folders anytime.</span></li>
+      <li style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 15px">Instant preview</strong><span style="font-size: 14px; color: #565B70">Open PDFs and images without downloading.</span></li>
+      <li style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 15px">Per profile</strong><span style="font-size: 14px; color: #565B70">Business papers stay apart from family files.</span></li>
+      <li style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 15px">On every device</strong><span style="font-size: 14px; color: #565B70">Add a photo of a receipt from your phone.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="reveal" id="how" aria-labelledby="how-h" style="max-width: 1240px; margin: 0 auto; padding: 0 48px 100px; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px">
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px">
+    <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #3B5BDB"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #E5484D; box-shadow: 0 0 0 4px rgba(229,72,77,0.2)"></span>Live demo</span>
+    <h2 id="how-h" style="margin: 0; font-size: 44px; line-height: 1.08; font-weight: 800; letter-spacing: -0.04em">See how it works, <span class="grad">right now</span></h2>
+    <p style="margin: 0; max-width: 580px; font-size: 16px; line-height: 1.6; color: #3E4257">This is the real Alocora app, playing on its own. Tap any step to jump to it.</p>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center; justify-content: center">
+    <div style="flex: 1 1 420px; max-width: 520px; display: flex; flex-direction: column; gap: 12px">
+      <sc-for list="{{demoSteps}}" as="s" hint-placeholder-count="4">
+        <button type="button" onClick="{{s.pick}}" aria-current="{{s.cur}}" style="position: relative; overflow: hidden; text-align: left; box-sizing: border-box; padding: 20px 22px; border-radius: 22px; border: 1px solid {{s.edge}}; background: {{s.bg}}; box-shadow: {{s.sh}}; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); display: flex; gap: 16px; align-items: flex-start; cursor: pointer; font: inherit; color: #1B1C22; transition: background .3s, box-shadow .3s">
+          <span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 12px; background: {{s.numBg}}; color: {{s.numFg}}; box-shadow: {{s.numSh}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">{{s.n}}</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><strong style="font-size: 17px; letter-spacing: -0.01em">{{s.title}}</strong><span style="font-size: 14px; line-height: 1.55; color: #3E4257">{{s.body}}</span></span>
+          <span aria-hidden="true" style="position: absolute; left: 0; bottom: 0; height: 3px; width: {{s.prog}}%; background: linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22)"></span>
+        </button>
+      </sc-for>
+      <button type="button" onClick="{{togglePlay}}" class="chip btn-light" style="align-self: flex-start; height: 44px; padding: 0 16px; border-radius: 13px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 8px; font: 600 14px Inter, sans-serif; cursor: pointer">{{playLabel}}</button>
+    </div>
+
+    <div role="img" aria-label="Alocora mobile app demo: {{demoNow}}" style="flex: none; position: relative; width: 344px; height: 704px; border-radius: 60px; padding: 4px; box-sizing: border-box; border: 4px solid transparent; background: linear-gradient(#050507, #050507) padding-box, linear-gradient(145deg, #F2F0EC 0%, #A8A59F 12%, #6B6863 26%, #D9D6D0 40%, #8C8984 55%, #E4E1DB 68%, #75726D 82%, #C7C4BE 92%, #55524E 100%) border-box; box-shadow: 0 0 0 1px rgba(40,40,44,0.55), inset 0 0 0 1px rgba(255,255,255,0.07), 0 44px 90px rgba(20,24,60,0.42), 0 10px 24px rgba(20,24,60,0.22)">
+      <span aria-hidden="true" style="position: absolute; left: -8px; top: 118px; width: 4px; height: 30px; border-radius: 3px 0 0 3px; background: linear-gradient(90deg, #6B6863, #D9D6D0 45%, #8C8984)"></span>
+      <span aria-hidden="true" style="position: absolute; left: -8px; top: 172px; width: 4px; height: 58px; border-radius: 3px 0 0 3px; background: linear-gradient(90deg, #6B6863, #D9D6D0 45%, #8C8984)"></span>
+      <span aria-hidden="true" style="position: absolute; left: -8px; top: 244px; width: 4px; height: 58px; border-radius: 3px 0 0 3px; background: linear-gradient(90deg, #6B6863, #D9D6D0 45%, #8C8984)"></span>
+      <span aria-hidden="true" style="position: absolute; right: -8px; top: 200px; width: 4px; height: 92px; border-radius: 0 3px 3px 0; background: linear-gradient(90deg, #6B6863, #D9D6D0 45%, #8C8984)"></span>
+      <span aria-hidden="true" style="position: absolute; right: -6px; top: 400px; width: 3px; height: 62px; border-radius: 0 2px 2px 0; background: linear-gradient(90deg, #3E3C39, #8C8984)"></span>
+      <div style="position: relative; width: 100%; height: 100%; border-radius: 51px; overflow: hidden; background-color: #B7C3EE; background-image: radial-gradient(ellipse 150% 55% at -15% 108%, rgba(255,255,255,.9) 0%, rgba(242,244,252,.65) 34%, transparent 62%), radial-gradient(ellipse 75% 42% at 100% 0%, rgba(66,92,222,.55), transparent 70%), linear-gradient(165deg, #D6DCF6 0%, #ABBAEE 40%, #90A4E9 62%, #C3CCF2 86%, #EBEDF9 100%); font-size: 13px">
+        <span aria-hidden="true" style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 104px; height: 30px; border-radius: 999px; background: #000000; z-index: 5; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; box-sizing: border-box"><span style="width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #3A4A7A, #0B0F1E 60%); box-shadow: inset 0 0 0 1.5px #1A1C24"></span></span>
+        <div style="position: absolute; left: 0; right: 0; top: 14px; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600"><span>9:41</span><span style="display: inline-flex; align-items: center; gap: 5px"><svg width="17" height="11" viewBox="0 0 17 11" fill="#1B1C22" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.5" y="5" width="3" height="6" rx="1"></rect><rect x="9" y="2.5" width="3" height="8.5" rx="1"></rect><rect x="13.5" y="0" width="3" height="11" rx="1"></rect></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#1B1C22" opacity="0.4"></rect><rect x="2" y="2" width="16" height="8" rx="2" fill="#1B1C22"></rect><rect x="22.5" y="4" width="1.8" height="4" rx="0.9" fill="#1B1C22" opacity="0.4"></rect></svg></span></div>
+        <div style="position: absolute; left: 16px; right: 16px; top: 52px; display: flex; justify-content: space-between; align-items: center">
+          <span style="display: flex; align-items: center; gap: 8px"><span style="width: 30px; height: 30px; border-radius: 9px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display: block"><path d="M4.5 20 12 4l7.5 16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.3 14.3h7.4" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round"></path><circle cx="12" cy="4.2" r="1.2" fill="#F472B6"></circle></svg></span><strong style="font-size: 15px">{{demoTitle}}</strong></span>
+          <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(180deg, #FFFFFF, #F2F4FB); box-shadow: 0 2px 6px rgba(52,64,140,0.18); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #3B5BDB">YN</span>
+        </div>
+
+        <div style="position: absolute; left: 16px; right: 16px; top: 98px; bottom: 16px">
+
+          <sc-if value="{{d0}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <span style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 2px 6px">How will you use Alocora?</span>
+              <sc-for list="{{demoProfiles}}" as="p" hint-placeholder-count="3">
+                <div style="display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 18px; background: {{p.bg}}; border: 2px solid {{p.ring}}; box-shadow: {{p.sh}}; transition: all .35s; transform: scale({{p.sc}})">
+                  <span style="width: 40px; height: 40px; border-radius: 12px; background: {{p.ib}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700">{{p.i}}</span>
+                  <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 14px">{{p.n}}</strong><span style="font-size: 11px; color: #565B70">{{p.d}}</span></span>
+                  <span style="width: 22px; height: 22px; border-radius: 50%; border: 2px solid {{p.ring}}; background: {{p.dot}}; color: #FFFFFF; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: all .35s">{{p.mark}}</span>
+                </div>
+              </sc-for>
+              <span style="margin-top: 14px; height: 50px; border-radius: 15px; background: linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; box-shadow: 0 10px 22px rgba(27,28,34,0.28); opacity: {{d0btn}}; transform: scale({{d0press}}); transition: all .3s">Continue as Business</span>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{dCards}}" hint-placeholder-val="{{false}}">
+            <div style="display: flex; flex-direction: column; gap: 14px">
+              <div style="position: relative; height: 172px; border-radius: 18px; overflow: hidden; background: #0B0B0F; box-shadow: 0 16px 30px rgba(20,24,60,0.35); color: #FFFFFF">
+                <span class="dots2" style="position: absolute; inset: 0"></span><span class="dots" style="position: absolute; inset: 0"></span>
+                <span style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 22px; padding: 0 14px; border-radius: 0 0 10px 10px; background: rgba(40,40,48,0.85); font: 600 9px/22px Inter, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #E4E4E7; white-space: nowrap">Debit card</span>
+                <span style="position: absolute; right: 16px; top: 54px; font: 600 13px Inter, sans-serif; letter-spacing: 0.1em">****&nbsp; ****&nbsp; ****&nbsp; 4821</span>
+                <span style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; padding: 24px 16px 14px; background: linear-gradient(0deg, rgba(11,11,15,0.92), rgba(11,11,15,0.5) 60%, transparent)"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 11px; color: #D4D4D8">Main account · EUR</span><span style="font: 700 28px/1 Inter, sans-serif; letter-spacing: -0.03em">{{demoBal}}</span></span><span style="font: 300 16px Inter, sans-serif; letter-spacing: 0.06em">Alocora</span></span>
+              </div>
+
+              <sc-if value="{{d1}}" hint-placeholder-val="{{false}}">
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                  <span style="display: flex; justify-content: space-between; font-weight: 600; font-size: 14px; padding: 0 2px"><span>Accounts</span><span style="color: #565B70; font-weight: 500">{{d1count}}</span></span>
+                  <div style="display: flex; gap: 10px; overflow: hidden">
+                    <div style="flex: none; position: relative; width: 150px; height: 94px; border-radius: 14px; overflow: hidden; background: #0B0B0F; color: #FFFFFF; box-shadow: 0 8px 18px rgba(20,24,60,0.3)"><span class="dots" style="position: absolute; inset: 0"></span><span style="position: absolute; left: 10px; bottom: 8px; display: flex; flex-direction: column"><span style="font-size: 9px; color: #D4D4D8">Main account</span><span style="font-weight: 700; font-size: 15px">€24,860</span></span></div>
+                    <div style="flex: none; position: relative; width: 150px; height: 94px; border-radius: 14px; overflow: hidden; background: #0B0B0F; color: #FFFFFF; box-shadow: 0 8px 18px rgba(20,24,60,0.3); opacity: {{d1op}}; transform: translateX({{d1x}}px) scale({{d1sc}}); transition: all .6s cubic-bezier(.2,.8,.2,1)"><span class="dots2" style="position: absolute; inset: 0"></span><span class="dots" style="position: absolute; inset: 0"></span><span style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 16px; padding: 0 8px; border-radius: 0 0 7px 7px; background: rgba(40,40,48,0.85); font: 600 7px/16px Inter, sans-serif; letter-spacing: 0.12em; color: #E4E4E7">VIRTUAL</span><span style="position: absolute; left: 10px; bottom: 8px; display: flex; flex-direction: column"><span style="font-size: 9px; color: #D4D4D8">{{d1name}}</span><span style="font-weight: 700; font-size: 15px">€0</span></span></div>
+                  </div>
+                  <div style="padding: 12px; border-radius: 16px; background: rgba(255,255,255,0.7); box-shadow: 0 6px 14px rgba(52,64,140,0.12); display: flex; flex-direction: column; gap: 6px">
+                    <span style="font-size: 11px; color: #565B70; font-weight: 600">Account name</span>
+                    <span style="height: 36px; border-radius: 10px; background: rgba(214,220,242,0.6); box-shadow: inset 0 1px 3px rgba(40,50,110,0.2); display: flex; align-items: center; padding: 0 10px; font-weight: 500">{{d1name}}<span style="width: 1.5px; height: 16px; background: #3B5BDB; margin-left: 1px; opacity: {{caret}}"></span></span>
+                  </div>
+                  <span style="align-self: center; height: 34px; padding: 0 14px; border-radius: 999px; background: #1B1C22; color: #FFFFFF; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; opacity: {{d1toast}}; transform: translateY({{d1toastY}}px); transition: all .4s">✓ Spring Launch card created</span>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{d2}}" hint-placeholder-val="{{false}}">
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                  <div style="padding: 12px; border-radius: 16px; background: rgba(255,255,255,0.7); box-shadow: 0 6px 14px rgba(52,64,140,0.12); display: flex; flex-direction: column; gap: 6px">
+                    <span style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600"><span>Marketing budget</span><span style="color: #565B70">{{d2pct}}%</span></span>
+                    <span style="height: 8px; border-radius: 999px; background: rgba(214,220,242,0.8); overflow: hidden"><span style="display: block; width: {{d2pct}}%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22); transition: width .8s ease"></span></span>
+                  </div>
+                  <div style="padding: 6px 12px; border-radius: 16px; background: rgba(255,255,255,0.7); box-shadow: 0 6px 14px rgba(52,64,140,0.12); display: flex; flex-direction: column">
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; overflow: hidden; max-height: {{d2rowH}}px; opacity: {{d2rowOp}}; transition: all .5s"><span style="width: 32px; height: 32px; border-radius: 10px; background: rgba(194,65,140,0.12); color: #C2418C; display: flex; align-items: center; justify-content: center; font-weight: 700">M</span><span style="flex: 1; display: flex; flex-direction: column"><span style="font-weight: 600">Meta Ads</span><span style="font-size: 11px; color: #565B70">Marketing · just now</span></span><span style="font-weight: 600">−€42.50</span></div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid rgba(40,50,110,0.1)"><span style="width: 32px; height: 32px; border-radius: 10px; background: rgba(59,91,219,0.12); color: #3B5BDB; display: flex; align-items: center; justify-content: center; font-weight: 700">F</span><span style="flex: 1; display: flex; flex-direction: column"><span style="font-weight: 600">Figma</span><span style="font-size: 11px; color: #565B70">Tools · yesterday</span></span><span style="font-weight: 600">−€15.00</span></div>
+                  </div>
+                  <div style="padding: 12px; border-radius: 18px; background: rgba(255,255,255,0.85); box-shadow: 0 10px 24px rgba(52,64,140,0.18); display: flex; flex-direction: column; gap: 8px; opacity: {{d2padOp}}; transition: opacity .4s">
+                    <span style="text-align: center; font-size: 26px; font-weight: 700; letter-spacing: -0.03em">{{d2amt}}</span>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px">
+                      <sc-for list="{{keys}}" as="k" hint-placeholder-count="12"><span style="height: 30px; border-radius: 9px; background: {{k.bg}}; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; transition: background .15s">{{k.l}}</span></sc-for>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{d3}}" hint-placeholder-val="{{false}}">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <span style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 2px 0">Documents</span>
+              <div style="display: flex; gap: 6px">
+                <span style="height: 32px; padding: 0 12px; border-radius: 10px; background: linear-gradient(180deg, #4A4E60, #1B1C22); color: #FFFFFF; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center">Receipts</span>
+                <span style="height: 32px; padding: 0 12px; border-radius: 10px; background: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; color: #3E4257">Invoices</span>
+                <span style="height: 32px; padding: 0 12px; border-radius: 10px; background: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; color: #3E4257">Tax</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+                <div style="height: 150px; border-radius: 14px; background: rgba(255,255,255,0.9); box-shadow: 0 6px 14px rgba(52,64,140,0.14); padding: 8px; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px; opacity: {{d3op}}; transform: scale({{d3sc}}); transition: all .5s cubic-bezier(.2,.8,.2,1)">
+                  <span style="flex: 1; border-radius: 8px; background: repeating-linear-gradient(180deg, rgba(40,50,110,0.1) 0 5px, transparent 5px 11px), #F6F7FC; position: relative"><span style="position: absolute; top: 6px; left: 6px; padding: 0 6px; border-radius: 5px; background: #3B5BDB; color: #FFFFFF; font-size: 9px; font-weight: 700; line-height: 16px">JPG</span></span>
+                  <span style="font-size: 11px; font-weight: 600">Meta_Ads_receipt.jpg</span>
+                  <span style="height: 4px; border-radius: 999px; background: rgba(214,220,242,0.9); overflow: hidden"><span style="display: block; height: 100%; width: {{d3up}}%; background: linear-gradient(90deg, #3B5BDB, #7C3AED); transition: width .2s linear"></span></span>
+                </div>
+                <div style="height: 150px; border-radius: 14px; background: rgba(255,255,255,0.9); box-shadow: 0 6px 14px rgba(52,64,140,0.14); padding: 8px; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px">
+                  <span style="flex: 1; border-radius: 8px; background: repeating-linear-gradient(180deg, rgba(40,50,110,0.1) 0 5px, transparent 5px 11px), #F6F7FC; position: relative"><span style="position: absolute; top: 6px; left: 6px; padding: 0 6px; border-radius: 5px; background: #B4123F; color: #FFFFFF; font-size: 9px; font-weight: 700; line-height: 16px">PDF</span></span>
+                  <span style="font-size: 11px; font-weight: 600">Invoice_Oct.pdf</span>
+                </div>
+              </div>
+              <span style="align-self: center; margin-top: 6px; height: 34px; padding: 0 14px; border-radius: 999px; background: #1B1C22; color: #FFFFFF; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; opacity: {{d3toast}}; transform: translateY({{d3toastY}}px); transition: all .4s">✓ Saved to Receipts · linked to −€42.50</span>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal" id="security" aria-labelledby="sec-h" style="max-width: 1240px; margin: 0 auto; padding: 0 48px 100px; box-sizing: border-box">
+  <div style="position: relative; overflow: hidden; border-radius: 34px; padding: 56px; box-sizing: border-box; background: radial-gradient(ellipse 80% 70% at 15% -10%, rgba(45,95,200,0.55), transparent 65%), linear-gradient(180deg, #0A1229 0%, #060A16 45%, #0B1B3E 80%, #2F64D6 97%, #8CB8FF 100%); border: 1px solid rgba(140,175,255,0.22); box-shadow: inset 0 -26px 50px -16px rgba(110,170,255,0.7), 0 30px 60px rgba(20,40,120,0.3); color: #FFFFFF; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+    <span class="sheen" aria-hidden="true"></span>
+    <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 16px; position: relative">
+      <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8FB6FF">Security &amp; privacy</span>
+      <h2 id="sec-h" style="margin: 0; font-size: 42px; line-height: 1.1; font-weight: 800; letter-spacing: -0.04em">Your money and your papers, kept private</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C4CCDD">Strong sign-in, separate profiles and encrypted document storage. You decide who in your family or team sees what.</p>
+    </div>
+    <ul style="flex: 1 1 440px; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; position: relative">
+      <sc-for list="{{security}}" as="s" hint-placeholder-count="4">
+        <li style="padding: 18px; border-radius: 18px; background: rgba(150,175,230,0.12); border: 1px solid rgba(180,200,255,0.18); display: flex; flex-direction: column; gap: 6px"><strong style="font-size: 15px">{{s.t}}</strong><span style="font-size: 13px; line-height: 1.5; color: #AEB8CC">{{s.d}}</span></li>
+      </sc-for>
+    </ul>
+  </div>
+</section>
+
+<section class="reveal" id="ai" aria-labelledby="ai-h" style="max-width: 1240px; margin: 0 auto; padding: 0 48px 100px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+  <div style="flex: 1 1 440px; display: flex; flex-direction: column; gap: 20px">
+    <span style="align-self: flex-start; height: 34px; padding: 0 14px 0 6px; border-radius: 999px; display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.85); box-shadow: 0 4px 12px rgba(52,64,140,0.12); font-size: 13px; font-weight: 600; color: #3E4257"><span style="height: 24px; padding: 0 10px; border-radius: 999px; background: linear-gradient(90deg, #3B5BDB, #7C3AED 55%, #C2418C); color: #FFFFFF; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; display: inline-flex; align-items: center">24/7</span>Alocora AI support</span>
+    <h2 id="ai-h" style="margin: 0; font-size: 46px; line-height: 1.06; font-weight: 800; letter-spacing: -0.045em">AI support, <span class="grad">always with you, day and night</span></h2>
+    <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #3E4257">Not sure how something works? Ask Alocora AI. It knows every feature of the platform and explains it in a few clear words, any time of day, on web and mobile.</p>
+    <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px">
+      <li style="display: flex; gap: 14px; align-items: flex-start"><span aria-hidden="true" class="ico" style="flex: none; width: 42px; height: 42px; color: #3B5BDB"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Available around the clock</strong><span style="font-size: 14px; color: #565B70">Weekends, holidays, 3 a.m. Alocora AI is always there.</span></span></li>
+      <li style="display: flex; gap: 14px; align-items: flex-start"><span aria-hidden="true" class="ico" style="flex: none; width: 42px; height: 42px; color: #7C3AED"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6z"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Knows every feature</strong><span style="font-size: 14px; color: #565B70">Accounts, cards, budgets, savings, projects, plans and documents.</span></span></li>
+      <li style="display: flex; gap: 14px; align-items: flex-start"><span aria-hidden="true" class="ico" style="flex: none; width: 42px; height: 42px; color: #C2418C"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-size: 16px">Takes you there</strong><span style="font-size: 14px; color: #565B70">Short answers with a button straight to the right screen.</span></span></li>
+    </ul>
+  </div>
+  <div style="flex: 1 1 440px; max-width: 520px; position: relative">
+    <div aria-hidden="true" style="position: absolute; inset: -30px; border-radius: 60px; background: radial-gradient(ellipse at 30% 20%, rgba(59,91,219,0.35), transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(194,65,140,0.3), transparent 60%); filter: blur(20px)"></div>
+    <span aria-hidden="true" style="position: absolute; z-index: 2; top: -16px; right: 24px; height: 32px; padding: 0 12px; border-radius: 999px; background: #1B1C22; color: #FFFFFF; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 8px 18px rgba(27,28,34,0.3)"><span style="width: 7px; height: 7px; border-radius: 50%; background: #8FB6FF; box-shadow: 0 0 0 3px rgba(143,182,255,0.3)"></span>Try it, it's live</span>
+    <div style="position: relative">
+      <dc-import name="AiChat" embedded="1" inline="1" hint-size="100%,600px"></dc-import>
+    </div>
+  </div>
+</section>
+
+<section class="reveal" aria-labelledby="cta-h" style="max-width: 1240px; margin: 0 auto; padding: 0 48px 80px; box-sizing: border-box">
+  <div class="glass" style="border-radius: 34px; padding: 64px 48px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px">
+    <h2 id="cta-h" style="margin: 0; max-width: 760px; font-size: 52px; line-height: 1.05; font-weight: 800; letter-spacing: -0.045em">Give every euro <span class="grad">a place to go.</span></h2>
+    <p style="margin: 0; max-width: 560px; font-size: 17px; line-height: 1.6; color: #3E4257">Open your Alocora Wallet in minutes. Choose a profile, add your first account and start tracking today.</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px">
+      <a href="Login.dc.html" class="dark btn-dark" style="height: 56px; padding: 0 28px; border-radius: 16px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px">Get started free<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <a href="Welcome.dc.html" class="chip btn-light" style="height: 56px; padding: 0 24px; border-radius: 16px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"></rect><path d="M11 18h2"></path></svg>Get the mobile app</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="reveal" style="max-width: 1240px; margin: 0 auto; padding: 0 48px 48px; box-sizing: border-box; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; color: #565B70; font-size: 13px">
+  <span style="display: flex; align-items: center; gap: 10px"><span style="width: 30px; height: 30px; border-radius: 9px; background: #1B1C22; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px"><svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display: block"><path d="M4.5 20 12 4l7.5 16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.3 14.3h7.4" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round"></path><circle cx="12" cy="4.2" r="1.2" fill="#F472B6"></circle></svg></span>© 2026 Alocora · Your virtual wallet</span>
+  <span style="display: flex; gap: 20px"><a href="#features" style="color: #3E4257; text-decoration: none">Features</a><a href="#security" style="color: #3E4257; text-decoration: none">Privacy</a><a href="#how" style="color: #3E4257; text-decoration: none">Help</a></span>
+</footer>
+
+<dc-import name="AiChat" embedded="1" hint-size="1px,1px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    this.state = { navActive: 0, navHover: null, pill: { x: 0, w: 0, op: 0 }, prof: 'business', step: 0, tick: reduce ? 49 : 0, playing: !reduce };
+  }
+  componentDidMount() {
+    this.setupReveal();
+    this.setupNavSpy();
+    this.timer = setInterval(() => {
+      if (!this.state.playing) return;
+      const t = this.state.tick + 1;
+      if (t >= 50) this.setState({ step: (this.state.step + 1) % 4, tick: 0 });
+      else this.setState({ tick: t });
+    }, 100);
+  }
+  componentWillUnmount() { clearInterval(this.timer); if (this.io) this.io.disconnect(); clearTimeout(this.revealT); if (this.spy) this.spy.disconnect(); }
+  measurePill(i) {
+    const el = this.navEls && this.navEls[i];
+    if (!el) return;
+    const p = this.state.pill || {};
+    if (p.x === el.offsetLeft && p.w === el.offsetWidth && p.op === 1) return;
+    this.setState({ pill: { x: el.offsetLeft, w: el.offsetWidth, op: 1 } });
+  }
+  setupNavSpy() {
+    this.navEls = this.navEls || [];
+    setTimeout(() => this.measurePill(this.state.navActive || 0), 80);
+    if (typeof IntersectionObserver === 'undefined') return;
+    const ids = ['why', 'features', 'profiles', 'documents', 'how', 'security'];
+    const els = ids.map(id => { try { return document.getElementById(id); } catch (e) { return null; } });
+    this.spy = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const i = ids.indexOf(en.target.id);
+        if (i < 0 || i === this.state.navActive) return;
+        this.setState({ navActive: i });
+        if (this.state.navHover == null) this.measurePill(i);
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    els.forEach(el => { if (el) this.spy.observe(el); });
+  }
+  setupReveal() {
+    let els = [];
+    try { els = Array.from(document.querySelectorAll('.reveal')); } catch (e) { return; }
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce || typeof IntersectionObserver === 'undefined') { els.forEach(el => el.classList.add('in')); return; }
+    let shown = 0;
+    this.io = new IntersectionObserver((entries) => {
+      entries.filter(en => en.isIntersecting).forEach((en, i) => {
+        en.target.style.transitionDelay = Math.min(i, 6) * 180 + 'ms';
+        en.target.classList.add('in'); shown += 1;
+        this.io.unobserve(en.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+    els.forEach(el => this.io.observe(el));
+  }
+  renderVals() {
+    const st = this.state;
+    const p = st.tick / 50, step = st.step;
+    const SD = [
+      ['Choose your profile', 'Pick Business, Personal or Family. Each profile is its own separate wallet.'],
+      ['Add an account & card', 'Create a secondary account for a project or goal. It gets its own virtual card instantly.'],
+      ['Log an expense', 'Type the amount, pick a category and watch your budget and balance update live.'],
+      ['Save the receipt', 'Snap or upload the receipt. It lands in your folders, linked to the expense.']
+    ];
+    const demoSteps = SD.map(([title, body], i) => { const on = i === step; return {
+      n: String(i + 1), title, body, cur: on ? 'step' : 'false', prog: on ? Math.round(p * 100) : 0,
+      bg: on ? 'rgba(255,255,255,0.78)' : 'rgba(255,255,255,0.32)', edge: on ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.5)',
+      sh: on ? '0 18px 40px rgba(52,64,140,0.18)' : 'none',
+      numBg: on ? 'linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%)' : 'rgba(255,255,255,0.7)', numFg: on ? '#FFFFFF' : '#3E4257', numSh: on ? '0 8px 18px rgba(27,28,34,0.28)' : '0 1px 3px rgba(30,40,90,0.12)',
+      pick: () => this.setState({ step: i, tick: 0 }) }; });
+    const chosen = step === 0 && p > 0.3;
+    const demoProfiles = [['B', 'Business', 'Projects, teams & cost centres', '#3B5BDB'], ['P', 'Personal', 'Salary, bills & savings', '#7C3AED'], ['F', 'Family', 'Shared household money', '#C2418C']].map(([i, n, d, ib], k) => { const on = k === 0 && chosen; return {
+      i, n, d, ib, bg: on ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.55)', ring: on ? '#1B1C22' : 'rgba(40,50,110,0.18)', dot: on ? '#1B1C22' : 'transparent', mark: on ? '✓' : '',
+      sh: on ? '0 12px 26px rgba(52,64,140,0.2)' : '0 2px 6px rgba(52,64,140,0.08)', sc: on ? 1.02 : 1 }; });
+    const name = 'Spring Launch'.slice(0, step === 1 ? Math.min(13, Math.floor(p / 0.48 * 13)) : 13);
+    const made = step === 1 && p > 0.55;
+    const seq = ['4', '2', '.', '5', '0'];
+    const typed = step === 2 ? Math.max(0, Math.min(5, Math.floor((p - 0.05) / 0.09) + 1)) : 0;
+    const amts = ['€0', '€4', '€42', '€42.', '€42.5', '€42.50'];
+    const logged = step === 2 && p > 0.62;
+    const lastKey = typed > 0 && typed <= 5 && p < 0.55 ? seq[typed - 1] : '';
+    const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', '⌫'].map(l => ({ l, bg: l === lastKey ? 'rgba(59,91,219,0.22)' : 'rgba(214,220,242,0.55)' }));
+    const up = Math.max(0, Math.min(1, (p - 0.15) / 0.4));
+    const demo = {
+      demoSteps, demoNow: SD[step][0], demoBody: SD[step][1], demoTitle: ['Welcome', 'Home', 'Home', 'Documents'][step],
+      playLabel: st.playing ? '❚❚  Pause demo' : '▶  Play demo', togglePlay: () => this.setState({ playing: !this.state.playing }),
+      d0: step === 0, d0btn: chosen ? 1 : 0.35, d0press: step === 0 && p > 0.8 ? 0.96 : 1, demoProfiles,
+      dCards: step === 1 || step === 2, demoBal: logged ? '€24,817.70' : '€24,860.20',
+      d1: step === 1, d1name: name, caret: st.tick % 6 < 3 ? 1 : 0, d1op: made ? 1 : 0, d1x: made ? 0 : 70, d1sc: made ? 1 : 0.9,
+      d1count: made ? '2 accounts' : '1 account', d1toast: step === 1 && p > 0.62 ? 1 : 0, d1toastY: step === 1 && p > 0.62 ? 0 : 10,
+      d2: step === 2, d2amt: amts[typed], keys, d2padOp: logged ? 0 : 1, d2rowH: logged ? 60 : 0, d2rowOp: logged ? 1 : 0, d2pct: logged ? 71 : 64,
+      d3: step === 3, d3op: p > 0.15 ? 1 : 0, d3sc: p > 0.15 ? 1 : 0.85, d3up: Math.round(up * 100), d3toast: p > 0.62 ? 1 : 0, d3toastY: p > 0.62 ? 0 : 10
+    };
+    const demoTx = [['S', 'Supermarket', '−€64.20', '#1B1C22'], ['N', 'Netflix', '−€13.99', '#1B1C22'], ['P', 'Salary', '+€3,650', '#3E4257']].map(([i, n, a, c]) => ({ i, n, a, c }));
+    const demoBudgets = [['Groceries', 72, 'linear-gradient(90deg, #3B5BDB, #7C3AED)', '#565B70'], ['Marketing', 64, 'linear-gradient(90deg, #7C3AED, #C2418C)', '#565B70'], ['Eating out', 94, 'linear-gradient(90deg, #C2418C, #B4123F)', '#B4123F']].map(([n, pp, bar, tc]) => ({ n, p: pp, bar, tc }));
+    const demoDocs = [['Invoice_Oct.pdf', 'PDF', '#B4123F', -4], ['Receipt.jpg', 'JPG', '#3B5BDB', 2], ['Contract.pdf', 'PDF', '#B4123F', 5]].map(([n, t, b, r]) => ({ n, t, b, r }));
+    const ic = (d) => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
+    const features = [
+      { isWallet: true, title: 'Virtual wallet & smart cards', color: '#3B5BDB', icon: ic('<rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20M6 15h4"></path>'), body: 'One main account plus secondary accounts you can add, rename or remove. Each one comes with its own virtual card.', points: ['Unlimited accounts per profile', 'Move money between accounts instantly', 'Freeze or remove a card in one tap'] },
+      { isExpense: true, title: 'Expense tracking', color: '#7C3AED', icon: ic('<path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"></path><path d="M9 8h6M9 12h6"></path>'), body: 'Log every expense in seconds and see where your money goes, by category, account or project.', points: ['Quick-add keypad on mobile', 'Automatic categories', 'Weekly, monthly and quarterly views'] },
+      { isBudget: true, title: 'Budgets that warn you early', color: '#C2418C', icon: ic('<path d="M21 12a9 9 0 1 1-9-9"></path><path d="M21 3v9h-9"></path>'), body: 'Set limits for groceries, marketing, rent or anything else. Alocora tells you before you overspend.', points: ['Per-category budget pockets', 'Alerts at 80% and 100%', 'Rolls over every month'] },
+      { isSavings: true, title: 'Savings goals', color: '#3E4257', icon: ic('<path d="M19 7c-1-2-3.5-3-7-3C7 4 4 7 4 11c0 2.5 1.2 4.4 3 5.6V20h3v-2h4v2h3v-3.4c1.4-.9 2.4-2.2 2.8-3.6H22v-4h-2.2c-.2-.7-.5-1.4-.8-2z"></path><circle cx="15" cy="10" r="1"></circle>'), body: 'Put money aside for a holiday, an emergency fund or a new car, and watch your growth chart climb.', points: ['Dedicated savings accounts', 'Progress towards each goal', 'Balance growth over time'] },
+      { isProjects: true, title: 'Projects & business plans', color: '#3B5BDB', icon: ic('<path d="M3 3v18h18"></path><path d="m7 15 4-4 3 3 6-6"></path>'), body: 'Allocate resources to projects across marketing, operations, people and tools, and build step-by-step business plans.', points: ['Resource allocation sliders', 'Milestones and status tracking', 'Guided business plan builder'] },
+      { isDocs: true, title: 'Document vault', color: '#C2418C', icon: ic('<path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>'), body: 'Store invoices, receipts, contracts and payslips in folders, with instant previews on web and mobile.', points: ['Create and manage folders', 'Upload from phone or desktop', 'Preview without downloading'] }
+    ];
+    const P = {
+      business: { label: 'Business', account: 'Main account', balance: '€148,320', href: 'Main.dc.html', points: ['A virtual card for every project, team or cost centre', 'Allocate budget across marketing, operations, people and tools', 'Write and save business plans next to your numbers', 'Keep invoices and contracts in shared folders'], pots: [['Spring Launch', '€18,500', 64], ['Platform v2', '€24,800', 41], ['Tax reserve', '€12,000', 80]] },
+      personal: { label: 'Personal', account: 'Main account', balance: '€4,860', href: 'MainPersonal.dc.html', points: ['See your salary and monthly bills at a glance', 'Daily and monthly budgets that keep you on track', 'Savings goals for holidays and emergencies', 'Payslips and warranties stored safely'], pots: [['Holiday fund', '€1,250', 52], ['Emergency', '€6,000', 75], ['Bills', '€1,420', 88]] },
+      family: { label: 'Family', account: 'Joint account', balance: '€7,420', href: 'MainFamily.dc.html', points: ['A joint account for the whole household', 'Shared pots for groceries, school and home', 'Plan family goals together', 'Keep school, health and home papers in one place'], pots: [['Groceries', '€600', 70], ['School', '€950', 45], ['Home', '€2,100', 60]] }
+    };
+    const bars = ['linear-gradient(90deg, #3B5BDB, #7C3AED)', 'linear-gradient(90deg, #7C3AED, #C2418C)', 'linear-gradient(90deg, #9095A8, #3E4257 55%, #1B1C22)'];
+    const cur = P[st.prof];
+    const prof = { ...cur, pots: cur.pots.map(([name, amt, pct], i) => ({ name, amt, pct, bar: bars[i] })) };
+    const tabs = ['business', 'personal', 'family'].map(k => { const on = st.prof === k; return { label: P[k].label, sel: on ? 'true' : 'false', bg: on ? 'linear-gradient(180deg, #FFFFFF 0%, #F2F4FB 100%)' : 'transparent', sh: on ? '0 1px 2px rgba(30,40,90,0.14), 0 4px 10px rgba(52,64,140,0.14)' : 'none', pick: () => this.setState({ prof: k }) }; });
+    const folders = [['Receipts', true], ['Invoices', false], ['Contracts', false], ['Tax', false]].map(([name, on]) => ({ name, bg: on ? 'linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%)' : 'rgba(255,255,255,0.75)', fg: on ? '#FFFFFF' : '#3E4257', sh: on ? '0 8px 16px rgba(27,28,34,0.25)' : '0 2px 6px rgba(52,64,140,0.1)' }));
+    const docs = [['Invoice_Oct.pdf', 'PDF', '#B4123F'], ['Groceries_0211.jpg', 'JPG', '#3B5BDB'], ['Office_rent.pdf', 'PDF', '#B4123F'], ['Budget_Q4.xlsx', 'XLS', '#3E4257'], ['Fuel_receipt.png', 'PNG', '#7C3AED'], ['Insurance.pdf', 'PDF', '#B4123F']].map(([name, type, badge]) => ({ name, type, badge }));
+    const steps = [
+      { n: '1', title: 'Choose your profile', body: 'Sign up and pick Business, Personal or Family. Each one is a separate wallet with its own data.' },
+      { n: '2', title: 'Add accounts & cards', body: 'Start with your main account, then create secondary accounts for projects, goals or household pots.' },
+      { n: '3', title: 'Track, plan & store', body: 'Log expenses, set budgets, grow savings and upload documents, on the web or on your phone.' }
+    ];
+    const security = [
+      { t: 'Separate profiles', d: 'Business, personal and family data never mix.' },
+      { t: 'Encrypted documents', d: 'Files are stored encrypted and private to you.' },
+      { t: 'Two-step sign-in', d: 'Protect your wallet with an extra check.' },
+      { t: 'Card controls', d: 'Freeze, rename or remove any virtual card.' }
+    ];
+    const GR = 'linear-gradient(180deg, #4A4E60 0%, #1B1C22 100%)';
+    const organize = [['€', 'Money', 'linear-gradient(135deg, #3B5BDB, #5B7BF0)'], ['P', 'Plans', 'linear-gradient(135deg, #7C3AED, #9B5CF6)'], ['E', 'Expenses', 'linear-gradient(135deg, #C2418C, #E05AA8)'], ['Pr', 'Projects', 'linear-gradient(135deg, #3B5BDB, #7C3AED)'], ['D', 'Documents', 'linear-gradient(135deg, #7C3AED, #C2418C)']].map(([i, l, bg], k, arr) => ({ i, l, bg, arrow: k < arr.length - 1 }));
+    const mkBars = (vals, grad) => vals.map((v, k) => ({ h: v, c: k === vals.length - 1 ? GR : grad }));
+    const audiences = [
+      { i: 'B', title: 'Businesses', tag: 'Founders, freelancers & teams', bg: 'linear-gradient(135deg, #3B5BDB, #5B7BF0)', body: 'Turn scattered spending into clear projects. Allocate budget across marketing, operations, people and tools, write your business plan and keep every invoice ready for your accountant.', metric: 'Revenue kept on plan', value: '+18%', bars: mkBars([30, 38, 34, 46, 52, 58, 66, 82], 'rgba(59,91,219,0.35)'), points: ['A card and budget for every project', 'Business plans next to real numbers', 'Invoices and contracts in shared folders'] },
+      { i: 'P', title: 'People', tag: 'Salary, daily life & personal goals', bg: 'linear-gradient(135deg, #7C3AED, #9B5CF6)', body: 'Know exactly where your salary goes each month. Set daily and monthly budgets, build an emergency fund and save for the things that matter, step by step.', metric: 'Saved this year', value: '€4,980', bars: mkBars([20, 26, 31, 37, 44, 52, 61, 74], 'rgba(124,58,237,0.32)'), points: ['Bills and subscriptions under control', 'Savings goals with visible progress', 'Payslips and warranties always at hand'] },
+      { i: 'F', title: 'Families', tag: 'Households, couples & parents', bg: 'linear-gradient(135deg, #C2418C, #E05AA8)', body: 'Run the household from one joint wallet. Share pots for groceries, school and home, plan family goals together and keep important papers organized for everyone.', metric: 'Household budget on track', value: '92%', bars: mkBars([62, 70, 58, 74, 68, 80, 77, 92], 'rgba(194,65,140,0.3)'), points: ['Joint account with shared pots', 'Family goals everyone can follow', 'School, health and home papers in one place'] }
+    ];
+    const NAV = [['#why', 'Why Alocora'], ['#features', 'Features'], ['#profiles', "Who it's for"], ['#documents', 'Documents'], ['#how', 'How it works'], ['#security', 'Security']];
+    const hi = st.navHover != null ? st.navHover : st.navActive;
+    const navItems = NAV.map(([href, label], i) => ({ href, label, cur: i === st.navActive ? 'location' : 'false',
+      color: i === hi ? '#1B1C22' : '#3E4257', fw: i === hi ? 600 : 500,
+      setRef: (el) => { this.navEls = this.navEls || []; this.navEls[i] = el; },
+      enter: () => { if (this.state.navHover !== i) { this.setState({ navHover: i }); this.measurePill(i); } },
+      click: () => { this.setState({ navActive: i, navHover: null }); this.measurePill(i); } }));
+    return { navItems, pill: st.pill || { x: 0, w: 0, op: 0 }, setNavBox: (el) => { this.navBox = el; }, navLeave: () => { this.setState({ navHover: null }); this.measurePill(this.state.navActive || 0); }, organize, audiences, ...demo, demoTx, demoBudgets, demoDocs, features, prof, tabs, folders, docs, steps, security };
+  }
+}
+</script>
+</body>
+</html>

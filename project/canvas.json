@@ -1,0 +1,238 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "AiChat.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Alocora AI — chat assistant",
+      "w": 420,
+      "x": 7380,
+      "y": 0
+    },
+    "ChooseProfile.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "is_interactive": true,
+      "title": "Web — choose your profile (after login)",
+      "w": 1440,
+      "x": 3040,
+      "y": 1840
+    },
+    "Documents.dc.html": {
+      "expand": "fill",
+      "h": 1100,
+      "is_interactive": true,
+      "title": "Documents — folders, previews, upload",
+      "w": 1440,
+      "x": 0,
+      "y": 1840
+    },
+    "Landing.dc.html": {
+      "expand": "fill",
+      "h": 6200,
+      "is_interactive": true,
+      "title": "Web — landing page (live demo)",
+      "w": 1440,
+      "x": 0,
+      "y": 4900
+    },
+    "LandingMobile.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — landing page with explore menu",
+      "w": 390,
+      "x": 1520,
+      "y": 4900
+    },
+    "Login.dc.html": {
+      "expand": "fill",
+      "h": 1000,
+      "is_interactive": true,
+      "title": "Web — log in (Google, Apple, email)",
+      "w": 1440,
+      "x": 2000,
+      "y": 4900
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 1720,
+      "is_interactive": true,
+      "title": "Overview — Business profile",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "MainFamily.dc.html": {
+      "expand": "fill",
+      "h": 1720,
+      "is_interactive": true,
+      "title": "Overview — Family profile",
+      "w": 1440,
+      "x": 1520,
+      "y": 3060
+    },
+    "MainPersonal.dc.html": {
+      "expand": "fill",
+      "h": 1720,
+      "is_interactive": true,
+      "title": "Overview — Personal profile",
+      "w": 1440,
+      "x": 0,
+      "y": 3060
+    },
+    "Mobile.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — Business home",
+      "w": 390,
+      "x": 5500,
+      "y": 0
+    },
+    "MobileAdd.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — add expense",
+      "w": 390,
+      "x": 5970,
+      "y": 0
+    },
+    "MobileChoose.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — choose your profile",
+      "w": 390,
+      "x": 5030,
+      "y": 0
+    },
+    "MobileDocs.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — documents",
+      "w": 390,
+      "x": 6910,
+      "y": 0
+    },
+    "MobileFamily.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — Family home",
+      "w": 390,
+      "x": 5970,
+      "y": 964
+    },
+    "MobileLogin.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — log in (Google, Apple, email)",
+      "w": 390,
+      "x": 3520,
+      "y": 4900
+    },
+    "MobilePersonal.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — Personal home",
+      "w": 390,
+      "x": 5500,
+      "y": 964
+    },
+    "MobileSettings.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — profile & settings",
+      "w": 390,
+      "x": 6440,
+      "y": 0
+    },
+    "Plan.dc.html": {
+      "expand": "fill",
+      "h": 1480,
+      "is_interactive": true,
+      "title": "Business plan builder",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "Projects.dc.html": {
+      "expand": "fill",
+      "h": 1280,
+      "is_interactive": true,
+      "title": "Projects — resource allocation",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Settings.dc.html": {
+      "expand": "fill",
+      "h": 1100,
+      "is_interactive": true,
+      "title": "Profile & settings",
+      "w": 1440,
+      "x": 1520,
+      "y": 1840
+    },
+    "Welcome.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 40,
+      "title": "Mobile — welcome (animated)",
+      "w": 390,
+      "x": 4560,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-02T17:58:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "title": {
+      "kind": "title1",
+      "maxW": 7800,
+      "text": "Alocora Wallet — expenses, budgets, projects & business plans",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Landing.dc.html",
+    "LandingMobile.dc.html",
+    "MobileLogin.dc.html",
+    "Login.dc.html",
+    "Main.dc.html",
+    "Projects.dc.html",
+    "Plan.dc.html",
+    "Documents.dc.html",
+    "Settings.dc.html",
+    "ChooseProfile.dc.html",
+    "MainPersonal.dc.html",
+    "MainFamily.dc.html",
+    "Welcome.dc.html",
+    "MobileChoose.dc.html",
+    "Mobile.dc.html",
+    "MobileAdd.dc.html",
+    "MobileSettings.dc.html",
+    "MobileDocs.dc.html",
+    "MobilePersonal.dc.html",
+    "MobileFamily.dc.html",
+    "AiChat.dc.html"
+  ],
+  "pages": [],
+  "title": "Alocora Wallet — Business Finance App"
+}
